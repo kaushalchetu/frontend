@@ -1,0 +1,25 @@
+$mediaMaxWidth: 1260px;
+$mediaBp1Width: 960px;
+$mobile: 768px;
+
+@function translate-media-condition($c) {
+  $condMap: (
+    "screen": "only screen",
+    "<mobile": "(max-width: #{$mobile})"
+  );
+
+  @return map-get( $condMap, $c );
+}
+
+// The media mixin
+@mixin media($args...) {
+  $query: "";
+  @each $arg in $args {
+    $op: "";
+    @if ( $query != "" ) {
+      $op: " and ";
+    }
+    $query: $query + $op + translate-media-condition($arg);
+  }
+  @media #{$query}  { @content; }
+}
