@@ -38,7 +38,7 @@ const Sidebar = () => {
                                 <li className="nav-item">
                                     <Link to="/users/add" className="nav-link">
                                         <i className="far fa-circle nav-icon"></i>
-                                        <p>Add User</p>
+                                        <p>Create User</p>
                                     </Link>
                                 </li>
                             </ul>
@@ -61,10 +61,19 @@ const Sidebar = () => {
                                 <li className="nav-item">
                                     <Link to="/roles/add" className="nav-link">
                                         <i className="far fa-circle nav-icon"></i>
-                                        <p>Add Role</p>
+                                        <p>Create Role</p>
                                     </Link>
                                 </li>
                             </ul>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="#" className="nav-link">
+                                <i className="nav-icon fas fa-database"></i>
+                                <p>
+                                    Reports
+                                    {/* <i className="right fas fa-angle-left"></i> */}
+                                </p>
+                            </Link>
                         </li>
                     </ul>
                 </nav>

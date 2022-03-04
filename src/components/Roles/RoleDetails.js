@@ -49,13 +49,13 @@ const RoleDetails = ({ match }) => {
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
+        dispatch(clearMessage())
         if (id) {
             dispatch(getRole(id))
             return () => {
                 dispatch(clearRole())
             }
         }
-
         return () => {
             dispatch(clearMessage())
         }
@@ -128,28 +128,28 @@ const RoleDetails = ({ match }) => {
     }
 
     return (
-        <div class="content-wrapper">
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Add Role</h1>
+        <div className="content-wrapper">
+            <section className="content-header">
+                <div className="container-fluid">
+                    <div className="row mb-2">
+                        <div className="col-sm-6">
+                            <h1>Create Role</h1>
                         </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Add Role</li>
+                        <div className="col-sm-6">
+                            <ol className="breadcrumb float-sm-right">
+                                <li className="breadcrumb-item"><a href="#">Home</a></li>
+                                <li className="breadcrumb-item active">Create Role</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card card-primary">
+            <section className="content">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="card card-primary">
                                 <Form onSubmit={handleRole} ref={form}>
                                     {message && (
                                         <div className="form-group">
@@ -158,9 +158,9 @@ const RoleDetails = ({ match }) => {
                                             </div>
                                         </div>
                                     )}
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="name">Role Name</label>
+                                    <div className="card-body">
+                                        <div className="form-group">
+                                            <label htmlFor="name">Role Name</label>
                                             <Input
                                                 type="text"
                                                 name="name"
@@ -171,8 +171,23 @@ const RoleDetails = ({ match }) => {
                                                 validations={[required, vname]}
                                             />
                                         </div>
+                                        <div className="form-group" onChange={handleChange}>
+                                            <input 
+                                            type="radio" 
+                                            value={fields.status}
+                                            name="status" 
+                                            defaultChecked
+                                            /> 
+                                            Active
+                                            <input 
+                                            type="radio" 
+                                            value={fields.status}
+                                            name="status" 
+                                            /> 
+                                            Inactive
+                                        </div>
                                     </div>
-                                    <div class="card-footer">
+                                    <div className="card-footer">
                                         <button className="btn btn-primary" disabled={loading}>
                                             {loading && (
                                                 <span className="spinner-border spinner-border-sm"></span>
@@ -184,7 +199,7 @@ const RoleDetails = ({ match }) => {
                                 </Form>
                             </div>
                         </div>
-                        <div class="col-md-6"></div>
+                        <div className="col-md-6"></div>
                     </div>
                 </div>
             </section>

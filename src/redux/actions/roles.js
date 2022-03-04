@@ -176,3 +176,32 @@ export const clearRole = () => (dispatch) => {
         payload: null,
     });
 };
+
+
+export const changeRoleStatus = (id) => (dispatch) => {
+    return RoleService.changeRoleStatus(id).then(
+        (response) => {
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response.data.message,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};

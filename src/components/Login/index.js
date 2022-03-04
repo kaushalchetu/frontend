@@ -49,7 +49,7 @@ const Login = (props) => {
 
         setLoading(true);
         form.current.validateAll();
-        
+
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(login(email, password))
                 .then(() => {
@@ -105,9 +105,9 @@ const Login = (props) => {
                         </div>
                         {message && (
                             <div className="form-group">
-                            <div className="alert alert-danger" role="alert">
-                                {message}
-                            </div>
+                                <div className="alert alert-danger" role="alert">
+                                    {message}
+                                </div>
                             </div>
                         )}
                         <Form onSubmit={handleLogin} ref={form} className="login__form">
@@ -198,10 +198,10 @@ const Login = (props) => {
                             </div>
                             <div>
                                 <button className="login__btn-my" disabled={loading}>
-                                {loading && (
-                                    <span className="spinner-border spinner-border-sm"></span>
-                                )}
-                                Sign in</button>
+                                    {loading && (
+                                        <span className="spinner-border spinner-border-sm"></span>
+                                    )}
+                                    Sign in</button>
                             </div>
                             {/* <div className="login__d-register">
                                 <p><a>Not a member yet ?</a> </p>

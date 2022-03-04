@@ -31,9 +31,18 @@ const updateRole = (id, fields) => {
         })
 };
 
+
+const changeRoleStatus = (id) => {
+    return axios.get(API_URL + "change-role-status/" + id,
+    {
+        headers: authHeader(),
+    })
+};
+
 export default {
     createRole,
     getAllRoles,
     getRoleById,
     updateRole,
+    changeRoleStatus,
 };

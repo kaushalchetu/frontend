@@ -13,19 +13,19 @@ const Header = () => {
 
     return (
         <nav className="main-header navbar navbar-expand navbar-white navbar-light">
-        <ul className="navbar-nav">
-            <li className="nav-item">
-                <a className="nav-link" data-widget="pushmenu" href="#" role="button"><i className="fas fa-bars"></i></a>
-            </li>
-        </ul>
-        <ul className="navbar-nav ml-auto">
-            <li className="nav-item dropdown">
-                <button className="btn btn-danger" onClick={logOut}>
-                    <i className="fas fa-lock"></i> Logout
-                </button>
-            </li>
-        </ul>
-    </nav>
+            <ul className="navbar-nav">
+                <li className="nav-item">
+                    <a className="nav-link" data-widget="pushmenu" href="#" role="button"><i className="fas fa-bars"></i></a>
+                </li>
+            </ul>
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item dropdown">
+                    <button className="btn btn-danger" onClick={logOut}>
+                        <i className="fas fa-lock"></i> Logout
+                    </button>
+                </li>
+            </ul>
+        </nav>
     )
 }
 

@@ -38,10 +38,18 @@ const deleteUser = id => {
     })
 };
 
+const changeUserStatus = (id) => {
+  return axios.get(API_URL + "change/user/status/" + id,
+  {
+      headers: authHeader(),
+  })
+};
+
 export default {
   getAllUsers,
   getUserById,
   updateUser,
   getActiveRoles,
-  deleteUser
+  deleteUser,
+  changeUserStatus
 };

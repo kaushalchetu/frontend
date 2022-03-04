@@ -22,14 +22,14 @@ const Profile = () => {
         <strong>Token:</strong> {localStorage.getItem('token')}
       </p> */}
       <p>
-        <strong>Full Name:</strong> {currentUser.user.first_name+' '+currentUser.user.last_name}
+        <strong>Full Name:</strong> {currentUser.user.first_name + ' ' + currentUser.user.last_name}
       </p>
       <p>
         <strong>Phone:</strong> {currentUser.user.phone_no}
       </p>
       <p>
         <strong>Email:</strong> {currentUser.user.email}
-      </p> 
+      </p>
       <strong>Role:</strong> {currentUser.user.role_id}
       <ul>
         {currentUser.user.roles}

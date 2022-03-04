@@ -9,6 +9,7 @@ import { isEmail } from "validator";
 import queryString from 'query-string';
 import { useNavigate, useParams } from 'react-router-dom'
 import { createUser, getAllRolesOptions, getUser, clearUser, updateUser } from "../../redux/actions/users";
+import { clearMessage } from "../../redux/actions/message";
 
 const required = (value) => {
   if (!value) {
@@ -93,14 +94,16 @@ const UserDetails = ({ match }) => {
   const { roleOptions, user } = useSelector(state => state.users);
 
   useEffect(() => {
+    dispatch(clearMessage())
     dispatch(getAllRolesOptions())
-
     if (id) {
       dispatch(getUser(id))
-
       return () => {
         dispatch(clearUser())
       }
+    }
+    return () => {
+      dispatch(clearMessage())
     }
 
   }, [])
@@ -135,11 +138,12 @@ const UserDetails = ({ match }) => {
     e.preventDefault();
 
     setSuccessful(false);
-    setLoading(true);
 
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
+      setLoading(true);
+
       if (id) {
         dispatch(updateUser(id, fields))
           .then(() => {
@@ -187,28 +191,28 @@ const UserDetails = ({ match }) => {
   }
 
   return (
-    <div class="content-wrapper">
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Add User</h1>
+    <div className="content-wrapper">
+      <section className="content-header">
+        <div className="container-fluid">
+          <div className="row mb-2">
+            <div className="col-sm-6">
+              <h1>Create User</h1>
             </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Add User</li>
+            <div className="col-sm-6">
+              <ol className="breadcrumb float-sm-right">
+                <li className="breadcrumb-item"><a href="#">Home</a></li>
+                <li className="breadcrumb-item active">Create User</li>
               </ol>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="content">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card card-primary">
+      <section className="content">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-12">
+              <div className="card card-primary">
                 <Form onSubmit={handleRegister} ref={form}>
                   {message && (
                     <div className="form-group">
@@ -217,15 +221,15 @@ const UserDetails = ({ match }) => {
                       </div>
                     </div>
                   )}
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label for="roleId">Role</label>
-                      <Select 
-                        className="form-control" 
-                        name="roleId" 
-                        value={fields.roleId} 
-                        validations={[required]} 
-                        onChange={handleChange} 
+                  <div className="card-body">
+                    <div className="form-group">
+                      <label htmlFor="roleId">Role</label>
+                      <Select
+                        className="form-control"
+                        name="roleId"
+                        value={fields.roleId}
+                        validations={[required]}
+                        onChange={handleChange}
                         disabled={isFetching}>
                         <option value="" disabled>Select Role</option>
                         {roleOptions.map(option => (
@@ -233,8 +237,8 @@ const UserDetails = ({ match }) => {
                         ))}
                       </Select>
                     </div>
-                    <div class="form-group">
-                      <label for="firstName">First Name</label>
+                    <div className="form-group">
+                      <label htmlFor="firstName">First Name</label>
                       <Input
                         type="text"
                         name="firstName"
@@ -246,8 +250,8 @@ const UserDetails = ({ match }) => {
                         disabled={isFetching}
                       />
                     </div>
-                    <div class="form-group">
-                      <label for="lastName">Last Name</label>
+                    <div className="form-group">
+                      <label htmlFor="lastName">Last Name</label>
                       <Input
                         type="text"
                         name="lastName"
@@ -259,8 +263,8 @@ const UserDetails = ({ match }) => {
                         disabled={isFetching}
                       />
                     </div>
-                    <div class="form-group">
-                      <label for="email">Email Address</label>
+                    <div className="form-group">
+                      <label htmlFor="email">Email Address</label>
                       <Input
                         type="text"
                         name="email"
@@ -272,8 +276,8 @@ const UserDetails = ({ match }) => {
                         disabled={isFetching}
                       />
                     </div>
-                    <div class="form-group">
-                      <label for="phoneNo">Phone Number</label>
+                    <div className="form-group">
+                      <label htmlFor="phoneNo">Phone Number</label>
                       <Input
                         type="text"
                         maxLength={10}
@@ -286,21 +290,23 @@ const UserDetails = ({ match }) => {
                         disabled={isFetching}
                       />
                     </div>
-                    <div class="form-group">
-                      <label for="password">Password</label>
-                      <Input
-                        type="password"
-                        name="password"
-                        className="form-control"
-                        placeholder="Enter Password"
-                        value={fields.password}
-                        onChange={handleChange}
-                        validations={[required, vpassword]}
-                        disabled={isFetching}
-                      />
-                    </div>
+                    {!id && (
+                      <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <Input
+                          type="password"
+                          name="password"
+                          className="form-control"
+                          placeholder="Enter Password"
+                          value={fields.password}
+                          onChange={handleChange}
+                          validations={[required, vpassword]}
+                          disabled={isFetching}
+                        />
+                      </div>
+                    )}
                   </div>
-                  <div class="card-footer">
+                  <div className="card-footer">
                     <button className="btn btn-primary" disabled={loading}>
                       {loading && (
                         <span className="spinner-border spinner-border-sm"></span>
@@ -314,7 +320,7 @@ const UserDetails = ({ match }) => {
                 </Form>
               </div>
             </div>
-            <div class="col-md-6"></div>
+            <div className="col-md-6"></div>
           </div>
         </div>
       </section>
