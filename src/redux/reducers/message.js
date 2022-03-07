@@ -1,7 +1,8 @@
-import { SET_MESSAGE, CLEAR_MESSAGE } from "../types";
+import { SET_MESSAGE, CLEAR_MESSAGE, SET_CHANGE_PASSWORD_MESSAGE, CLEAR_CHANGE_PASSWORD_MESSAGE } from "../types";
 
 const initialState = {
-  message: null
+  message: null,
+  changePasswordMessage: null
 };
 
 export default function (state = initialState, action) {
@@ -9,10 +10,30 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case SET_MESSAGE:
-      return { message: payload };
+      return {
+        ...state,
+        message: payload
+      };
 
     case CLEAR_MESSAGE:
-      return { message: null };
+      return {
+        ...state,
+        message: null
+      };
+
+    case SET_CHANGE_PASSWORD_MESSAGE:
+      return {
+        ...state,
+        changePasswordMessage: payload
+      };
+
+    case CLEAR_CHANGE_PASSWORD_MESSAGE:
+      return {
+        ...state,
+        changePasswordMessage: null
+      };
+
+
 
     default:
       return state;

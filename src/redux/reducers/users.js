@@ -4,7 +4,11 @@ import {
   SET_USERS,
   FETCHING_USERS,
   SET_USER,
-  SET_ROLE_OPTIONS
+  SET_ROLE_OPTIONS,
+  USER_PROFILE_SUCCESS,
+  USER_PROFILE_FAIL,
+  SET_USER_PROFILE,
+  FETCHING_USER_PROFILE
 } from "../types";
 
 const initialState = {
@@ -50,6 +54,7 @@ export default function (state = initialState, action) {
         ...state,
         roleOptions: payload,
       };
+
     default:
       return state;
   }

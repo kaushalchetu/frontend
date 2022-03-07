@@ -1,25 +1,21 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Sidebar = () => {
+    const { user } = useSelector(state => state.auth);
+    //console.log(user.role_id);
+
     return (
         <aside className="main-sidebar sidebar-dark-primary elevation-4">
             <Link to="/" className="brand-link">
-                <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: .8 }} />
-                <span className="brand-text font-weight-light">GeoData App</span>
+                <span className="brand-text font-weight-light"> <img src="/images/logo.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3" style={{ opacity: .8 }} /></span>
             </Link>
 
             <div className="sidebar">
-                <div className="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div className="image">
-                        <img src="/dist/img/user2-160x160.jpg" className="img-circle elevation-2" alt="User Image" />
-                    </div>
-                    <div className="info">
-                        <Link to="/profile" className="d-block">Admin</Link>
-                    </div>
-                </div>
-
                 <nav className="mt-2">
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    {user.role_id === 1 ? 
+                        <>
                         <li className="nav-item">
                             <Link to="#" className="nav-link">
                                 <i className="nav-icon fas fa-users"></i>
@@ -66,8 +62,12 @@ const Sidebar = () => {
                                 </li>
                             </ul>
                         </li>
+                        </>
+                        :
+                        null}
+                        
                         <li className="nav-item">
-                            <Link to="#" className="nav-link">
+                            <Link to="/reports" className="nav-link">
                                 <i className="nav-icon fas fa-database"></i>
                                 <p>
                                     Reports
@@ -75,6 +75,7 @@ const Sidebar = () => {
                                 </p>
                             </Link>
                         </li>
+                        
                     </ul>
                 </nav>
             </div>

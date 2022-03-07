@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllUsers, getAllRolesOptions, deleteUser, changeUserStatus } from "../../redux/actions/users";
 import DataTable from "react-data-table-component";
+import DataTableExtensions from "react-data-table-component-extensions";
+//import "react-data-table-component-extensions/dist/index.css";
+import { clearMessage } from "../../redux/actions/message";
+import Swal from 'sweetalert2/dist/sweetalert2'
+import 'sweetalert2/src/sweetalert2.scss'
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -17,7 +22,7 @@ const Users = () => {
   const handleStatusChange = (event, id) => {
 
     setChangeStatus(true);
-    setSuccessful(false);
+    //setSuccessful(false);
 
     dispatch(changeUserStatus(id)).then(() => {
       setTimeout(() => {
@@ -33,13 +38,30 @@ const Users = () => {
   }
 
   const handleDelete = id => {
-    dispatch(deleteUser(id))
-      .then(() => {
-        dispatch(getAllUsers())
-        dispatch(getAllRolesOptions())
-      })
-  }
 
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteUser(id))
+          .then(() => {
+            dispatch(getAllUsers())
+            dispatch(getAllRolesOptions())
+          })
+        // Swal.fire(
+        //   'Deleted!',
+        //   'Your file has been deleted.',
+        //   'success'
+        // )
+      }
+    })
+  }
   // const customStyles = {
   //   headCells: {
   //     style: {
@@ -71,7 +93,11 @@ const Users = () => {
       name: "Phone",
       selector: (row) => row.phone_no,
       sortable: false,
-      align: "center"
+    },
+    {
+      name: "Status",
+      selector: (row) => (row.status === 1) ? 'Active' : 'Inactive',
+      sortable: true
     },
     {
       name: "Action",
@@ -80,14 +106,14 @@ const Users = () => {
           <Link to={`/users/edit/${row.id}`} className="btn btn-info">
             <i className="right fas fa-edit"></i>
           </Link>
-          <button type="button" onClick={() => handleDelete(row.id)} className="btn btn-danger">
+          {/* <button type="button" onClick={() => handleDelete(row.id)} className="btn btn-danger">
             <i className="right fas fa-trash"></i>
-          </button>
+          </button> */}
         </div>
       )
     },
     {
-      name: "Status",
+      name: "Change Status",
       cell: (row) => (
         <div className="form-group">
           <div className="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
@@ -99,9 +125,17 @@ const Users = () => {
     },
   ];
 
+  // const tableData = {
+  //   columns,
+  //   users
+  // };
+
   useEffect(() => {
     dispatch(getAllUsers())
     dispatch(getAllRolesOptions())
+    return () => {
+      dispatch(clearMessage())
+    }
   }, [])
 
   useEffect(() => {
@@ -113,40 +147,33 @@ const Users = () => {
   }, [users])
 
   return (
-    // <div className="container-fluid">
-    //     <div className="card-body">
-    //     <Link to='/users/add' className="btn btn-primary"><i className="right fas fa-plus-circle"></i> Create User</Link>
-    //       <table id="example1" className="table table-bordered table-striped">
-    //     <DataTable
-    //       title="Users"
-    //       columns={columns}
-    //       data={users}
-    //       defaultSortFieldID={1}
-    //       pagination
-    //       progressPending={isFetching}
-    //       // customStyles={customStyles}
-    //     />
-    //     </table>
-    //     </div>
-    //   </div>
-    <div className="col-md-12">
-      {message && (
-        <div className="form-group">
-          <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
-            {message}
+    <div className="main-content">
+      <div className="col-md-12">
+        {message && (
+          <div className="form-group">
+            <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
+              {message}
+            </div>
           </div>
+        )}
+        <Link to='/users/add' className="btn btn-primary create-user"><i className="right fas fa-plus-circle"></i> Create User</Link>
+        <div className="custom-data-table">
+          {/* <DataTableExtensions
+            columns={columns}
+            data={users}
+          > */}
+          <DataTable
+            title="Users"
+            columns={columns}
+            data={users}
+            defaultSortFieldID={1}
+            pagination
+            progressPending={isFetching}
+          // customStyles={customStyles}
+          />
+          {/* </DataTableExtensions> */}
         </div>
-      )}
-      <Link to='/users/add' className="btn btn-primary"><i className="right fas fa-plus-circle"></i> Create User</Link>
-      <DataTable
-        title="Users"
-        columns={columns}
-        data={users}
-        defaultSortFieldID={1}
-        pagination
-        progressPending={isFetching}
-      // customStyles={customStyles}
-      />
+      </div>
     </div>
   );
 };

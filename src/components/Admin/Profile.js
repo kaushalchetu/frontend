@@ -6,12 +6,17 @@ import Input from "react-validation/build/input";
 import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import queryString from 'query-string';
 import { useNavigate, useParams } from 'react-router-dom'
-import { createUser, getAllRolesOptions, getUser, clearUser, updateUser } from "../../redux/actions/users";
+import { getAllRolesOptions } from "../../redux/actions/users";
+import { updateProfile } from "../../redux/actions/auth";
 import { clearMessage } from "../../redux/actions/message";
+// import BASE_URL from "../../helpers/baseUrl";
+import BASE_URL from "../../helpers/baseUrl";
 
-//Validations code start
+//const API_URL = "http://127.0.0.1:8000";
+// const BASE_URL = "http://127.0.0.1:8000";
+
+// Validations code start
 const required = (value) => {
   if (!value) {
     return (
@@ -61,29 +66,19 @@ const vlastname = (value) => {
     );
   }
 };
+// Validations code end
 
-const vpassword = (value) => {
-  if (value.length < 6 || value.length > 40) {
-    return (
-      <div className="error text-danger" role="alert">
-        The password must be between 6 and 40 characters.
-      </div>
-    );
-  }
-};
-//Validations code end
+const Profile = ({ match }) => {
 
-const UserDetails = ({ match }) => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  //const history = useHistory();
   const navigate = useNavigate();
 
-  const { id } = useParams();
   const form = useRef();
   const checkBtn = useRef();
 
   const [fields, setFields] = useState({
+    id: '',
     roleId: '',
     firstName: '',
     lastName: '',
@@ -93,89 +88,54 @@ const UserDetails = ({ match }) => {
   })
   const [successful, setSuccessful] = useState(false);
 
-  const { roleOptions, user } = useSelector(state => state.users);
+  const { roleOptions } = useSelector(state => state.users);
+  const { user } = useSelector(state => state.auth);
 
   useEffect(() => {
     dispatch(clearMessage())
     dispatch(getAllRolesOptions())
-    if (id) {
-      dispatch(getUser(id))
-      return () => {
-        dispatch(clearUser())
-      }
-    }
+    setFields({
+      id: user.id,
+      roleId: user.role_id,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      email: user.email,
+      phoneNo: user.phone_no,
+      profileImage: user.profile_image
+    })
     return () => {
       dispatch(clearMessage())
     }
 
   }, [])
 
-  useEffect(() => {
-    if (user && id) {
-      setFields({
-        roleId: user.role_id,
-        firstName: user.first_name,
-        lastName: user.last_name,
-        email: user.email,
-        phoneNo: user.phone_no,
-        password: '',
-      })
-    }
-    else {
-      setFields({
-        roleId: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNo: '',
-        password: ''
-      })
-    }
-    return () => {
-      dispatch(clearMessage())
-    }
-  }, [user])
-
   const { message } = useSelector(state => state.message);
   const { isFetching } = useSelector(state => state.users);
 
-  const handleRegister = (e) => {
+  const handleProfile = (e) => {
     e.preventDefault();
 
-    setSuccessful(false);
+    //setSuccessful(false);
 
     form.current.validateAll();
-
     if (checkBtn.current.context._errors.length === 0) {
       setLoading(true);
-
-      if (id) {
-        dispatch(updateUser(id, fields))
+      //For image upload use formdata code start
+      const formData = new FormData();
+      formData.append('firstName', fields.firstName);
+      formData.append('lastName', fields.lastName);
+      formData.append('email', fields.email);
+      formData.append('phoneNo', fields.phoneNo);
+      formData.append('profileImage', fields.profileImage)
+      //For image upload use formdata code end
+  
+      if (user.id) {
+        //dispatch(updateProfile(fields))
+        dispatch(updateProfile(formData))
           .then(() => {
             setSuccessful(true);
             setLoading(false);
-
-            setTimeout(() => {
-              //history.push("/users");
-              navigate("/users");
-            }, 1000);
-          })
-          .catch(() => {
-            setSuccessful(false);
-            setLoading(false);
-          });
-      }
-      else {
-        dispatch(createUser(fields))
-          .then(() => {
-            setSuccessful(true);
-            setLoading(false);
-
-            setTimeout(() => {
-              //history.push("/users");
-              navigate("/users");
-            }, 1000);
-
+            navigate("/profile");
           })
           .catch(() => {
             setSuccessful(false);
@@ -195,18 +155,27 @@ const UserDetails = ({ match }) => {
     })
   }
 
+  const handleFile = event => {
+
+    const value = event.target.files[0]
+
+    setFields({ ...fields, [event.target.name]: value  })
+    
+  }
+  console.log("fields.....", fields)
   return (
     <div className="content-wrapper">
+      {console.log(BASE_URL)}
       <section className="content-header">
         <div className="container-fluid">
           <div className="row mb-2">
             <div className="col-sm-6">
-              <h1>Create User</h1>
+              <h1>Update Profile</h1>
             </div>
             <div className="col-sm-6">
               <ol className="breadcrumb float-sm-right">
                 <li className="breadcrumb-item"><a href="#">Home</a></li>
-                <li className="breadcrumb-item active">Create User</li>
+                <li className="breadcrumb-item active">Update Profile</li>
               </ol>
             </div>
           </div>
@@ -218,7 +187,7 @@ const UserDetails = ({ match }) => {
           <div className="row">
             <div className="col-md-12">
               <div className="card card-primary">
-                <Form onSubmit={handleRegister} ref={form}>
+                <Form onSubmit={handleProfile} ref={form}>
                   {message && (
                     <div className="form-group">
                       <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
@@ -227,6 +196,23 @@ const UserDetails = ({ match }) => {
                     </div>
                   )}
                   <div className="card-body">
+                  <div className="row">
+                      <div className="col-sm-6">
+                        <div className="form-group">
+                          <img class="profile-user" src={`${BASE_URL}/images/` + user.profile_image} width="242" />
+                          <label htmlFor="lastName">Profile Pic</label>
+                          <Input
+                            type="file"
+                            accept="image/*"
+                            name="profileImage"
+                            className="form-group"
+                            onChange={handleFile}
+                            disabled={isFetching}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="row">
                       <div className="col-sm-6">
                         <div className="form-group">
@@ -310,23 +296,6 @@ const UserDetails = ({ match }) => {
                           />
                         </div>
                       </div>
-                      {!id && (
-                        <div className="col-sm-6">
-                          <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <Input
-                              type="password"
-                              name="password"
-                              className="form-control"
-                              placeholder="Enter Password"
-                              value={fields.password}
-                              onChange={handleChange}
-                              validations={[required, vpassword]}
-                              disabled={isFetching}
-                            />
-                          </div>
-                        </div>
-                      )}
                     </div>
                   </div>
                   <div className="card-footer text-center">
@@ -334,8 +303,9 @@ const UserDetails = ({ match }) => {
                       {loading && (
                         <span className="spinner-border spinner-border-sm"></span>
                       )}
-                      <span>{id ? 'Update User' : 'Create User'}</span>
+                      <span>Update Profile</span>
                     </button>
+
                     {/* <button type="submit" className="btn btn-primary">Submit</button> */}
                   </div>
                   <CheckButton style={{ display: "none" }} ref={checkBtn} />
@@ -350,4 +320,4 @@ const UserDetails = ({ match }) => {
   );
 };
 
-export default UserDetails;
+export default Profile;

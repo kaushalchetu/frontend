@@ -13,6 +13,7 @@ import {
 import UserService from "../../services/user.service";
 import AuthService from "../../services/auth.service";
 
+//User create code start
 export const createUser = (data) => (dispatch) => {
   return AuthService.register(data).then(
     (response) => {
@@ -48,7 +49,9 @@ export const createUser = (data) => (dispatch) => {
     }
   );
 };
+//User create code end
 
+//Get all user roles code start
 export const getAllRolesOptions = () => (dispatch) => {
   dispatch({
     type: FETCHING_USERS,
@@ -78,9 +81,10 @@ export const getAllRolesOptions = () => (dispatch) => {
 
     }
   );
-
 }
+//Get all user roles code end
 
+//Get all users code start
 export const getAllUsers = () => (dispatch) => {
   dispatch({
     type: FETCHING_USERS,
@@ -127,7 +131,9 @@ export const getAllUsers = () => (dispatch) => {
     }
   );
 };
+//Get all users code end
 
+//Get user by id code start
 export const getUser = id => (dispatch) => {
   dispatch({
     type: FETCHING_USERS,
@@ -174,7 +180,9 @@ export const getUser = id => (dispatch) => {
     }
   );
 };
+//Get user by id code end
 
+//User update code start
 export const updateUser = (id, fields) => (dispatch) => {
   return UserService.updateUser(id, fields).then(
     (response) => {
@@ -202,7 +210,9 @@ export const updateUser = (id, fields) => (dispatch) => {
     }
   );
 };
+//User update code end
 
+//User delete code start
 export const deleteUser = id => (dispatch) => {
   return UserService.deleteUser(id).then(
     (response) => {
@@ -229,38 +239,43 @@ export const deleteUser = id => (dispatch) => {
     }
   );
 };
+//User delete code end
 
+//User clear code start
 export const clearUser = () => (dispatch) => {
   dispatch({
     type: SET_USER,
     payload: null,
   });
 };
+//User clear code end
 
+//User status change code start
 export const changeUserStatus = (id) => (dispatch) => {
   return UserService.changeUserStatus(id).then(
-      (response) => {
-          dispatch({
-              type: SET_MESSAGE,
-              payload: response.data.message,
-          });
+    (response) => {
+      dispatch({
+        type: SET_MESSAGE,
+        payload: response.data.message,
+      });
 
-          return Promise.resolve();
-      },
-      (error) => {
-          const message =
-              (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-              error.message ||
-              error.toString();
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
 
-          dispatch({
-              type: SET_MESSAGE,
-              payload: message,
-          });
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
 
-          return Promise.reject();
-      }
+      return Promise.reject();
+    }
   );
 };
+//User status change code end

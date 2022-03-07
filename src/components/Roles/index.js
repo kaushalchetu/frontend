@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllRoles, changeRoleStatus } from "../../redux/actions/roles";
 import DataTable from "react-data-table-component";
+import { clearMessage } from "../../redux/actions/message";
 
 const Roles = () => {
     const dispatch = useDispatch();
@@ -14,9 +15,7 @@ const Roles = () => {
     const [successful, setSuccessful] = useState(false);
 
     const handleStatusChange = (event, id) => {
-
         setChangeStatus(true)
-        setSuccessful(false);
 
         dispatch(changeRoleStatus(id)).then(() => {
             setTimeout(() => {
@@ -61,7 +60,7 @@ const Roles = () => {
             )
         },
         {
-            name: "Status",
+            name: "Change Status",
             cell: (row) => (
                 <div className="form-group">
                     <div className="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
@@ -84,6 +83,9 @@ const Roles = () => {
 
     useEffect(() => {
         dispatch(getAllRoles())
+        return () => {
+            dispatch(clearMessage())
+        }
     }, [])
 
     useEffect(() => {
@@ -95,23 +97,27 @@ const Roles = () => {
     }, [roles])
 
     return (
-        <div>
-            {message && (
-                <div className="form-group">
-                    <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
-                        {message}
+        <div className="main-content">
+            <div className="col-md-12">
+                {message && (
+                    <div className="form-group">
+                        <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
+                            {message}
+                        </div>
                     </div>
+                )}
+                <Link to='/roles/add' className="btn btn-primary create-user"><i className="right fas fa-plus-circle"></i> Create Role</Link>
+                <div className="custom-data-table">
+                    <DataTable
+                        title="Roles"
+                        columns={columns}
+                        data={roles}
+                        defaultSortFieldID={1}
+                        pagination
+                        progressPending={isFetching}
+                    />
                 </div>
-            )}
-            <Link to='/roles/add' className="btn btn-primary"><i className="right fas fa-plus-circle"></i> Create Role</Link>
-            <DataTable
-                title="Roles"
-                columns={columns}
-                data={roles}
-                defaultSortFieldID={1}
-                pagination
-                progressPending={isFetching}
-            />
+            </div>
         </div>
     );
 };

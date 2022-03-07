@@ -11,6 +11,7 @@ import {
 
 import RoleService from "../../services/role.service";
 
+//Role create code start
 export const createRole = (data) => (dispatch) => {
     return RoleService.createRole(data).then(
         (response) => {
@@ -47,7 +48,9 @@ export const createRole = (data) => (dispatch) => {
         }
     );
 };
+//Role create code end
 
+//Get all roles code start
 export const getAllRoles = () => (dispatch) => {
     dispatch({
         type: FETCHING_ROLES,
@@ -94,7 +97,9 @@ export const getAllRoles = () => (dispatch) => {
         }
     );
 };
+//Get all roles code end
 
+//Get role by id code start
 export const getRole = id => (dispatch) => {
     dispatch({
         type: FETCHING_ROLES,
@@ -141,7 +146,9 @@ export const getRole = id => (dispatch) => {
         }
     );
 };
+//Get role by id code end
 
+//Role update code start
 export const updateRole = (id, fields) => (dispatch) => {
     return RoleService.updateRole(id, fields).then(
         (response) => {
@@ -169,15 +176,18 @@ export const updateRole = (id, fields) => (dispatch) => {
         }
     );
 };
+//Role update code end
 
+//Role clear code start
 export const clearRole = () => (dispatch) => {
     dispatch({
         type: SET_ROLE,
         payload: null,
     });
 };
+//Role clear code end
 
-
+//Role status change code start
 export const changeRoleStatus = (id) => (dispatch) => {
     return RoleService.changeRoleStatus(id).then(
         (response) => {
@@ -205,3 +215,4 @@ export const changeRoleStatus = (id) => (dispatch) => {
         }
     );
 };
+//Role status change code end

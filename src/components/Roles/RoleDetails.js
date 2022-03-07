@@ -9,10 +9,11 @@ import { useHistory, useParams, useNavigate } from 'react-router-dom'
 import { createRole, getRole, clearRole, updateRole } from "../../redux/actions/roles";
 import { clearMessage } from "../../redux/actions/message";
 
+//Validations code start
 const required = (value) => {
     if (!value) {
         return (
-            <div className="alert alert-danger" role="alert">
+            <div className="error text-danger" role="alert">
                 This field is required!
             </div>
         );
@@ -22,12 +23,13 @@ const required = (value) => {
 const vname = (value) => {
     if (value.length < 2 || value.length > 20) {
         return (
-            <div className="alert alert-danger" role="alert">
+            <div className="error text-danger" role="alert">
                 The name must be between 2 and 20 characters.
             </div>
         );
     }
 };
+//Validations code end
 
 const RoleDetails = ({ match }) => {
     const dispatch = useDispatch();
@@ -72,6 +74,9 @@ const RoleDetails = ({ match }) => {
             setFields({
                 name: ''
             })
+        }
+        return () => {
+            dispatch(clearMessage())
         }
     }, [role])
 
@@ -153,46 +158,37 @@ const RoleDetails = ({ match }) => {
                                 <Form onSubmit={handleRole} ref={form}>
                                     {message && (
                                         <div className="form-group">
-                                            <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
+                                            <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
                                                 {message}
                                             </div>
                                         </div>
                                     )}
-                                    <div className="card-body">
-                                        <div className="form-group">
-                                            <label htmlFor="name">Role Name</label>
-                                            <Input
-                                                type="text"
-                                                name="name"
-                                                className="form-control"
-                                                placeholder="Enter Role Name"
-                                                value={fields.name}
-                                                onChange={handleChange}
-                                                validations={[required, vname]}
-                                            />
+                                    <div className="row">
+                                    <div className="col-sm-3"></div>
+                                        <div className="col-sm-6">
+                                            <div className="card-body">
+                                                <div className="form-group">
+                                                    <label htmlFor="name">Role Name</label>
+                                                    <Input
+                                                        type="text"
+                                                        name="name"
+                                                        className="form-control"
+                                                        placeholder="Enter Role Name"
+                                                        value={fields.name}
+                                                        onChange={handleChange}
+                                                        validations={[required, vname]}
+                                                    />
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="form-group" onChange={handleChange}>
-                                            <input 
-                                            type="radio" 
-                                            value={fields.status}
-                                            name="status" 
-                                            defaultChecked
-                                            /> 
-                                            Active
-                                            <input 
-                                            type="radio" 
-                                            value={fields.status}
-                                            name="status" 
-                                            /> 
-                                            Inactive
-                                        </div>
+                                        <div className="col-sm-3"></div>
                                     </div>
-                                    <div className="card-footer">
+                                    <div className="card-footer text-center">
                                         <button className="btn btn-primary" disabled={loading}>
                                             {loading && (
                                                 <span className="spinner-border spinner-border-sm"></span>
                                             )}
-                                            <span>{id ? 'Update' : 'Add'}</span>
+                                            <span>{id ? 'Update Role' : 'Create Role'}</span>
                                         </button>
                                     </div>
                                     <CheckButton style={{ display: "none" }} ref={checkBtn} />

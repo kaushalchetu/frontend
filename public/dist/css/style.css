@@ -1,0 +1,10 @@
+/*main-content */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left .3s ease-in-out;
+  }
+  
+  body.sidebar-mini.layout-fixed.sidebar-collapse .main-content {
+    margin-left: 4.6rem;
+  }

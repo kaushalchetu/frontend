@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.print {
+  display: none !important;
+}
+
+.data-table-extensions > .data-table-extensions-filter > .filter-text {
+  border: 1px solid #dedede !important;
+}

@@ -1,0 +1,110 @@
+/*main-content */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s ease-in-out;
+    height: 87vh;
+  }
+  
+  body.sidebar-mini.layout-fixed.sidebar-collapse .main-content {
+    margin-left: 4.6rem;
+  }
+.custom-data-table .rdt_TableHead .rdt_TableCol {
+    background: #3e1685;
+    color: #fff;
+    font-size: 16px;
+}
+.custom-data-table .rdt_TableHead .rdt_TableCol {
+    background: #1f4e78;
+    color: #fff;
+    font-size: 16px;
+}
+
+.custom-data-table .rdt_TableBody .rdt_TableRow:nth-child(even) {
+    background: #bdd7ee;
+}
+
+.custom-data-table .rdt_TableBody .rdt_TableRow .rdt_TableCell {
+    font-size: 16px;
+    border: 1px solid #dedede;
+}
+
+.custom-data-table .rdt_TableBody .rdt_TableRow {
+    border: none !important;
+}
+
+.custom-data-table .rdt_TableBody .rdt_TableRow .rdt_TableCell a.btn {
+    margin-right: 10px;
+}
+.create-user {
+    float: right;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    z-index: 999;
+    border: none;
+}
+
+.custom-data-table .sc-bkkeKt.ezNeFY {
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: -15px;
+}
+.custom-switch .custom-control-label::before {
+    left: -2.25rem;
+    width: 2.75rem;
+    pointer-events: all;
+    border-radius: 0.5rem;
+    height: 1.3rem;
+}
+// .custom-switch.custom-switch-on-success .custom-control-input:checked~.custom-control-label::before {
+//     background-color: #3e1685;
+//     border-color: #3e1685;
+// }
+// .custom-switch.custom-switch-off-danger .custom-control-input~.custom-control-label::before {
+//     background-color: #e71288;
+//     border-color: #e71288;
+// }
+.custom-switch.custom-switch-off-danger .custom-control-input~.custom-control-label::after {
+    background-color: #ffffff;
+    top: 7px;
+    width: 15px;
+    height: 15px;
+}
+.custom-switch.custom-switch-on-success .custom-control-input:checked~.custom-control-label::after {
+    background-color: #fff;
+    right: -10px;
+    margin-left: 10px;
+}
+.custom-alert {
+    position: absolute;
+    z-index: 999;
+    right: 10%;
+    top: 0px;
+}
+span.brand-text.font-weight-light img {
+    line-height: normal;
+    margin: 0;
+    height: auto;
+    width: 110px;
+    max-height: none;
+    border-radius: 0;
+    position: relative;
+    top: -7px;
+    box-shadow: none !important;
+    margin: 0 auto !important;
+}
+
+a.brand-link {
+    height: 56px;
+    background: #343a40;
+}
+
+.text-center {
+    text-align:'center';
+}
+
+// .preview {
+//     height: 100px;
+//     width: auto;
+// }

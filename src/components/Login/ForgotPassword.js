@@ -1,15 +1,11 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//import { Redirect } from 'react-router-dom';
-
-import { Link, Navigate, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
-import { login } from "../../redux/actions/auth";
-import { clearMessage } from "../../redux/actions/message";
+import { isEmail } from "validator";
+import { forgotPassword, login } from "../../redux/actions/auth";
 
 //Validations code start
 const required = (value) => {
@@ -21,47 +17,50 @@ const required = (value) => {
         );
     }
 };
+
+const validEmail = (value) => {
+    if (!isEmail(value)) {
+        return (
+            <div className="error text-danger" role="alert">
+                This is not a valid email.
+            </div>
+        );
+    }
+}
 //Validations code end
 
-const Login = (props) => {
+const ForgotPassword = (props) => {
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const form = useRef();
     const checkBtn = useRef();
-
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const { isLoggedIn } = useSelector(state => state.auth);
-    const { message, changePasswordMessage } = useSelector(state => state.message);
+    const [fields, setFields] = useState({
+        email: '',
+    })
+    const [successful, setSuccessful] = useState(false);
+    const { message } = useSelector(state => state.message);
 
-    const dispatch = useDispatch();
-
-    const onChangeEmail = (e) => {
-        const email = e.target.value;
-        setEmail(email);
-    };
-
-    const onChangePassword = (e) => {
-        const password = e.target.value;
-        setPassword(password);
-    };
-
-    const handleLogin = (e) => {
+    const handleForgotPassword = (e) => {
         e.preventDefault();
 
         setLoading(true);
         form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
-            dispatch(login(email, password))
+            dispatch(forgotPassword(fields))
                 .then(() => {
-                    // props.history.push("/");
-                    // window.location.reload();
-                    navigate("/");
-                    window.location.reload();
+                    setLoading(false);
+                    setSuccessful(true);
+                    setFields({
+                        email: ''
+                    })
+                    // navigate("/");
                 })
                 .catch(() => {
+                    setSuccessful(false);
                     setLoading(false);
                 });
         } else {
@@ -69,8 +68,11 @@ const Login = (props) => {
         }
     };
 
-    if (isLoggedIn) {
-        return <Navigate to="/profile" />;
+    const handleChange = event => {
+        setFields({
+            ...fields,
+            [event.target.name]: event.target.value
+        })
     }
 
     return (
@@ -80,7 +82,7 @@ const Login = (props) => {
                     <div className="login__bg-effect">
                         <div className="login__logo pt-5">
                             <img
-                                src="images/logo.png"
+                                src="/images/logo.png"
                                 alt="login-logo"
                             />
                         </div>
@@ -97,24 +99,17 @@ const Login = (props) => {
                 <div className="col-md-4 login__right-pad3">
                     <div className="login__right-pad3--my-form">
                         <div className="pb-1">
-                            <h2>Get Started</h2>
-                            <p>Welcome back login with your data that you entered during registration.</p>
+                            <h2>Forgot Your Password?</h2>
+                            <p>To reset your password, enter the registered e-mail address and we will send you a password reset link on your e-mail.</p>
                         </div>
-                        {message && (
-                            <div className="form-group">
-                                <div className="alert alert-danger" role="alert">
-                                    {message}
+                        <Form onSubmit={handleForgotPassword} ref={form} className="login__form">
+                            {message && (
+                                <div className="form-group">
+                                    <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
+                                        {message}
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                        {changePasswordMessage && (
-                            <div className="form-group">
-                            <div className="alert alert-success" role="alert">
-                                {changePasswordMessage}
-                            </div>
-                        </div>
-                        )}
-                        <Form onSubmit={handleLogin} ref={form} className="login__form">
+                            )}
                             <div className="txt_field pb-4">
                                 <div className="txt_field__relative-item">
                                     <Input
@@ -122,9 +117,9 @@ const Login = (props) => {
                                         className="my-input email"
                                         name="email"
                                         placeholder="Username"
-                                        value={email}
-                                        onChange={onChangeEmail}
-                                        validations={[required]}
+                                        value={fields.email}
+                                        onChange={handleChange}
+                                        validations={[required, validEmail]}
                                     />
                                     <div className="txt_field__relative-item--absolute-mail">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24">
@@ -133,7 +128,7 @@ const Login = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="txt_field">
+                            {/* <div className="txt_field">
                                 <div className="txt_field__relative-item">
                                     <Input
                                         type="password"
@@ -150,8 +145,8 @@ const Login = (props) => {
                                         </svg>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="d-flex justify-content-between align-items-center pb-3 pt-3">
+                            </div> */}
+                            {/* <div className="d-flex justify-content-between align-items-center pb-3 pt-3">
                                 <div>
                                     <div className="login__round">
                                         <input type="checkbox" defaultChecked id="checkbox" />
@@ -164,13 +159,13 @@ const Login = (props) => {
                                         Forgot Password?
                                     </Link>
                                 </div>
-                            </div>
+                            </div> */}
                             <div>
                                 <button className="login__btn-my" disabled={loading}>
                                     {loading && (
                                         <span className="spinner-border spinner-border-sm"></span>
                                     )}
-                                    Sign in</button>
+                                    Send Confirmation</button>
                             </div>
                             {/* <div className="login__d-register">
                                 <p><a>Not a member yet ?</a> </p>
@@ -187,4 +182,4 @@ const Login = (props) => {
     );
 };
 
-export default Login;
+export default ForgotPassword;
