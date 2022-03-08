@@ -1,7 +1,8 @@
 import axios from "axios";
 import authHeader from "./auth-header";
+import { API_URL } from "../helpers/Constant";
 
-const API_URL = "http://127.0.0.1:8000/api/";       //API base url code
+//const API_URL = "http://127.0.0.1:8000/api/";       //API base url code
 
 //Get all users API code start
 const getAllUsers = () => {

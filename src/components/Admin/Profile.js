@@ -10,11 +10,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { getAllRolesOptions } from "../../redux/actions/users";
 import { updateProfile } from "../../redux/actions/auth";
 import { clearMessage } from "../../redux/actions/message";
-// import BASE_URL from "../../helpers/baseUrl";
-import BASE_URL from "../../helpers/baseUrl";
-
-//const API_URL = "http://127.0.0.1:8000";
-// const BASE_URL = "http://127.0.0.1:8000";
+import { BASE_URL } from "../../helpers/Constant";   //for multiple import
+// import BASE_URL from "../../helpers/Constant";   //for single import
 
 // Validations code start
 const required = (value) => {
@@ -101,7 +98,8 @@ const Profile = ({ match }) => {
       lastName: user.last_name,
       email: user.email,
       phoneNo: user.phone_no,
-      profileImage: user.profile_image
+      profileImage: user.profile_image,
+      roleName: user.role_name
     })
     return () => {
       dispatch(clearMessage())
@@ -128,7 +126,7 @@ const Profile = ({ match }) => {
       formData.append('phoneNo', fields.phoneNo);
       formData.append('profileImage', fields.profileImage)
       //For image upload use formdata code end
-  
+
       if (user.id) {
         //dispatch(updateProfile(fields))
         dispatch(updateProfile(formData))
@@ -159,13 +157,12 @@ const Profile = ({ match }) => {
 
     const value = event.target.files[0]
 
-    setFields({ ...fields, [event.target.name]: value  })
-    
+    setFields({ ...fields, [event.target.name]: value })
+
   }
-  console.log("fields.....", fields)
+
   return (
     <div className="content-wrapper">
-      {console.log(BASE_URL)}
       <section className="content-header">
         <div className="container-fluid">
           <div className="row mb-2">
@@ -196,10 +193,16 @@ const Profile = ({ match }) => {
                     </div>
                   )}
                   <div className="card-body">
-                  <div className="row">
+                    <div className="row">
                       <div className="col-sm-6">
                         <div className="form-group">
-                          <img class="profile-user" src={`${BASE_URL}/images/` + user.profile_image} width="242" />
+                          <div className="profile-picture">
+                            {/* {user.profile_image ? <img src={`${BASE_URL}/images/` + user.profile_image} className="profile-img-card" width="200" height="150" />
+                              :
+                              <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" className="profile-img-card" width="200" height="150"/>
+                            } */}
+                            <img src={`${BASE_URL}/images/` + user.profile_image} alt="profile-img" className="profile-img-card" width="200" height="150" />
+                          </div>
                           <label htmlFor="lastName">Profile Pic</label>
                           <Input
                             type="file"
@@ -223,11 +226,12 @@ const Profile = ({ match }) => {
                             value={fields.roleId}
                             validations={[required]}
                             onChange={handleChange}
-                            disabled={isFetching}>
+                            disabled={true}>
                             <option value="" disabled>Select Role</option>
-                            {roleOptions.map(option => (
+                            <option key={`${fields.roleId}`} value={fields.roleId}>{fields.roleName}</option>
+                            {/* {roleOptions.map(option => (
                               <option key={`${option.id}`} value={option.id}>{option.name}</option>
-                            ))}
+                            ))} */}
                           </Select>
                         </div>
                       </div>

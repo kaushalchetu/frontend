@@ -15,7 +15,9 @@ import Roles from "./components/Roles";
 import UserDetails from "./components/Users/UserDetails";
 import RoleDetails from "./components/Roles/RoleDetails";
 import Reports from "./components/Reports";
+import ImportReports from "./components/Reports/ImportReports"
 import AuthVerify from "./components/AuthVerify";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const history = createBrowserHistory();
 
@@ -49,6 +51,17 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="*" element={<Dashboard />} />
             <Route exact path="/profile" element={<Profile />} />
+            {/* Error boundary code start */}
+            {/* <Route
+              exact
+              path="/profile"
+              element={(
+                <ErrorBoundary>
+                  <Profile />
+                </ErrorBoundary>
+            )}
+            /> */}
+            {/* Error boundary code end */}
             <Route path="/change/password" element={<ChangePassword />} />
             <Route path="/users/add" element={<UserDetails />} />
             <Route path="/users/edit/:id" element={<UserDetails />} />
@@ -57,6 +70,7 @@ function App() {
             <Route path="/roles/edit/:id" element={<RoleDetails />} />
             <Route path="/roles" element={<Roles />} />
             <Route path="/reports" element={<Reports />} />
+            <Route path="/import/reports" element={<ImportReports />} />
           </Routes>
         </Layout>
       )}

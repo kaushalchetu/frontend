@@ -75,6 +75,15 @@ const Sidebar = () => {
                                 </p>
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to="/import/reports" className="nav-link">
+                                <i className="nav-icon fas fa-file"></i>
+                                <p>
+                                    Import Reports
+                                    {/* <i className="right fas fa-angle-left"></i> */}
+                                </p>
+                            </Link>
+                        </li>
                         
                     </ul>
                 </nav>

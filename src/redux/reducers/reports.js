@@ -1,6 +1,7 @@
 import {
     FETCHING_REPORTS,
-    SET_REPORTS
+    SET_REPORTS,
+    SET_MESSAGE
 } from "../types";
 
 const initialState = {
@@ -21,6 +22,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 reports: payload,
+            };
+        case SET_MESSAGE:
+            return {
+                ...state,
+                message: payload
             };
         default:
             return state;
