@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { displayReport } from "../../redux/actions/reports";
+import { generateRundataReports } from "../../redux/actions/rundataReports";
 import DataTable from "react-data-table-component";
 import DataTableExtensions from "react-data-table-component-extensions";
 import { clearMessage } from "../../redux/actions/message";
 import { reportSelector, headerSelector, footerSelector } from "../../redux/selectors/reportSelectors";
 import "react-data-table-component-extensions/dist/index.css";
 
-const Reports = () => {
+const GenerateRundataReports = () => {
 
     const [show, setShow] = useState(false);
     const dispatch = useDispatch();
@@ -17,15 +17,15 @@ const Reports = () => {
     const [successful, setSuccessful] = useState(false);
 
     const data = useSelector((state) =>
-        reportSelector(state.reports.reports)
+        reportSelector(state.rundataReports.rundataReports)
     )
 
     const headers = useSelector((state) =>
-        headerSelector(state.reports.reports)
+        headerSelector(state.rundataReports.rundataReports)
     )
 
     const footer = useSelector((state) =>
-        footerSelector(state.reports.reports)
+        footerSelector(state.rundataReports.rundataReports)
     )
 
     const columns = headers.map(header => ({
@@ -39,7 +39,7 @@ const Reports = () => {
     }))
 
     useEffect(() => {
-        dispatch(displayReport())
+        dispatch(generateRundataReports())
         return () => {
             dispatch(clearMessage())
         }
@@ -56,7 +56,7 @@ const Reports = () => {
                         </div>
                     </div>
                 )}
-                <button onClick={() => setShow(prev => !prev)} className="btn btn-primary" style={{ marginLeft: '45%' }}><i className="right fas fa-file"></i> Generate Report</button>
+                <button onClick={() => setShow(prev => !prev)} className="btn btn-primary" style={{ marginLeft: '45%' }}><i className="right fas fa-file"></i> Generate RunData Reports</button>
                 <div className="custom-data-table">
                     {show &&
                         (
@@ -66,7 +66,7 @@ const Reports = () => {
                                 exportHeaders
                             >
                                 <DataTable
-                                    title="Reports"
+                                    title="RunData Reports"
                                     columns={columns}
                                     data={data.concat(footer)}
                                     defaultSortFieldID={1}
@@ -83,4 +83,4 @@ const Reports = () => {
     );
 };
 
-export default Reports;
+export default GenerateRundataReports;

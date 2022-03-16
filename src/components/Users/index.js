@@ -8,6 +8,7 @@ import DataTableExtensions from "react-data-table-component-extensions";
 import { clearMessage } from "../../redux/actions/message";
 import Swal from 'sweetalert2/dist/sweetalert2'
 import 'sweetalert2/src/sweetalert2.scss'
+import classNames from "classnames";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -96,15 +97,29 @@ const Users = () => {
     },
     {
       name: "Status",
-      selector: (row) => (row.status === 1) ? 'Active' : 'Inactive',
+      selector: (row) =>
+        <small
+          className={classNames('badge', {
+            'badge-success': !!row.status,
+            'badge-danger': !row.status
+          })}
+        >
+          {!!row.status ? 'Active' : 'Inactive'}
+        </small>,
       sortable: true
     },
+    // {
+    //   name: "Status",
+    //   selector: (row) => (row.status === 1)
+    //     ? <small class="badge badge-success">Active</small> : <small class="badge badge-danger">Inactive</small>,
+    //   sortable: true
+    // },
     {
       name: "Action",
       cell: (row) => (
         <div>
           <Link to={`/users/edit/${row.id}`} className="btn btn-info">
-            <i className="right fas fa-edit"></i>
+            <i className="right fas fa-edit"></i> Edit
           </Link>
           {/* <button type="button" onClick={() => handleDelete(row.id)} className="btn btn-danger">
             <i className="right fas fa-trash"></i>

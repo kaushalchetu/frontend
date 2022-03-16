@@ -14,10 +14,14 @@ import Users from "./components/Users";
 import Roles from "./components/Roles";
 import UserDetails from "./components/Users/UserDetails";
 import RoleDetails from "./components/Roles/RoleDetails";
-import Reports from "./components/Reports";
-import ImportReports from "./components/Reports/ImportReports"
+//import Reports from "./components/Reports";
+//import ImportReports from "./components/ReportDataLists";
 import AuthVerify from "./components/AuthVerify";
 import ErrorBoundary from "./components/ErrorBoundary";
+import ImportRundataReports from "./components/RundataReports/ImportRundataReports";
+import GenerateRundataReports from "./components/RundataReports/GenerateRundataReports";
+import ImportSicReports from "./components/SicReports/ImportSicReports";
+import GenerateSicReports from "./components/SicReports/GenerateSicReports";
 
 const history = createBrowserHistory();
 
@@ -69,8 +73,10 @@ function App() {
             <Route path="/roles/add" element={<RoleDetails />} />
             <Route path="/roles/edit/:id" element={<RoleDetails />} />
             <Route path="/roles" element={<Roles />} />
-            <Route path="/reports" element={<Reports />} />
-            <Route path="/import/reports" element={<ImportReports />} />
+            <Route path="/import/rundata/reports" element={<ImportRundataReports />} />
+            <Route path="/generate/rundata/reports" element={<GenerateRundataReports />} />
+            <Route path="/import/sic/reports" element={<ImportSicReports />} />
+            <Route path="/generate/sic/reports" element={<GenerateSicReports />} />
           </Routes>
         </Layout>
       )}

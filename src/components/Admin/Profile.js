@@ -146,7 +146,6 @@ const Profile = ({ match }) => {
 
   const handleChange = event => {
     const value = event.target.name == 'phoneNo' ? event.target.value.replace(/\D/g, "") : event.target.value;
-
     setFields({
       ...fields,
       [event.target.name]: value
@@ -154,10 +153,11 @@ const Profile = ({ match }) => {
   }
 
   const handleFile = event => {
-
     const value = event.target.files[0]
-
-    setFields({ ...fields, [event.target.name]: value })
+    setFields({
+      ...fields,
+      [event.target.name]: value
+    })
 
   }
 
@@ -208,9 +208,10 @@ const Profile = ({ match }) => {
                             type="file"
                             accept="image/*"
                             name="profileImage"
-                            className="form-group"
+                            className="form-control"
                             onChange={handleFile}
                             disabled={isFetching}
+                            style={{ paddingTop: "3px" }}
                           />
                         </div>
                       </div>

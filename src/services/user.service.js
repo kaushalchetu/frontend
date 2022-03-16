@@ -52,9 +52,9 @@ const deleteUser = (id) => {
 //USer status change active(1)/inactive(0) API code start
 const changeUserStatus = (id) => {
   return axios.get(API_URL + "change/user/status/" + id,
-  {
+    {
       headers: authHeader(),
-  })
+    })
 };
 //USer status change active(1)/inactive(0) API code end
 

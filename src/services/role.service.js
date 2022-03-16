@@ -43,9 +43,9 @@ const updateRole = (id, fields) => {
 //Role status change active(1)/inactive(2) API code start
 const changeRoleStatus = (id) => {
     return axios.get(API_URL + "change/role/status/" + id,
-    {
-        headers: authHeader(),
-    })
+        {
+            headers: authHeader(),
+        })
 };
 //Role status change active(1)/inactive(2) API code end
 

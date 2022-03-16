@@ -164,7 +164,7 @@ const RoleDetails = ({ match }) => {
                                         </div>
                                     )}
                                     <div className="row">
-                                    <div className="col-sm-3"></div>
+                                        <div className="col-sm-3"></div>
                                         <div className="col-sm-6">
                                             <div className="card-body">
                                                 <div className="form-group">

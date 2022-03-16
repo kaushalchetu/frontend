@@ -32,14 +32,14 @@ export const reportSelector = createSelector(
             }
 
             const data = rows[year]
-            const totalGrandFinCost = data.reduce((total, value) => total + Number(value.finCost), 0)
+            const totalGrandFinCost = data.reduce((total, value) => total + Number(value.finCost), 0) / 1000000     //Calculation in millions
 
             headers.forEach(header => {
                 const filteredCost = data
                     .filter(value => value.secName === header)
                     .map(value => value.finCost)
 
-                const totalFinCost = filteredCost.reduce((total, cost) => total + Number(cost), 0)
+                const totalFinCost = filteredCost.reduce((total, cost) => total + Number(cost), 0) / 1000000       //Calculation in millions
 
                 row[header] = totalFinCost.toFixed(2)
             })

@@ -109,10 +109,10 @@ const Login = (props) => {
                         )}
                         {changePasswordMessage && (
                             <div className="form-group">
-                            <div className="alert alert-success" role="alert">
-                                {changePasswordMessage}
+                                <div className="alert alert-success" role="alert">
+                                    {changePasswordMessage}
+                                </div>
                             </div>
-                        </div>
                         )}
                         <Form onSubmit={handleLogin} ref={form} className="login__form">
                             <div className="txt_field pb-4">

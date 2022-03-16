@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getAllRoles, changeRoleStatus } from "../../redux/actions/roles";
 import DataTable from "react-data-table-component";
 import { clearMessage } from "../../redux/actions/message";
+import classNames from "classnames";
 
 const Roles = () => {
     const dispatch = useDispatch();
@@ -40,11 +41,24 @@ const Roles = () => {
         },
         {
             name: "Status",
-            selector: (row) => (row.status === 1) ? 'Active' : 'Inactive',
+            selector: (row) =>
+                <small
+                    className={classNames('badge', {
+                        'badge-success': (row.status === 1),
+                        'badge-danger': (row.status === 2)
+                    })}
+                >
+                    {(row.status === 1) ? 'Active' : 'Inactive'}
+                </small>,
             sortable: true
         },
+        // {
+        //     name: "Status",
+        //     selector: (row) => (row.status === 1) ? 'Active' : 'Inactive',
+        //     sortable: true
+        // },
         {
-            name: "Edit",
+            name: "Action",
             cell: (row) => (
                 // <Link to="#" className="nav-link">
                 //     <i className="nav-icon fas fa-users"></i>
@@ -55,7 +69,7 @@ const Roles = () => {
                 // </Link>
 
                 <Link to={`/roles/edit/${row.id}`} className="btn btn-info">
-                    <i className="right fas fa-edit"></i>
+                    <i className="right fas fa-edit"></i> Edit
                 </Link>
             )
         },

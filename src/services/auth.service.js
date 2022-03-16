@@ -5,7 +5,7 @@ import { API_URL } from "../helpers/Constant";
 //const API_URL = "http://127.0.0.1:8000/api/";       //API base url code
 
 //Register/User create API code start
- const register = (fields) => {
+const register = (fields) => {
   return axios.post(API_URL + "create/user", fields,
     {
       headers: authHeader(),
