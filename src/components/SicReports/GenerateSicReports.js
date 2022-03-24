@@ -62,13 +62,13 @@ const GenerateSicReports = () => {
                         (
                             <DataTableExtensions
                                 columns={columns}
-                                data={data.concat(footer)}
+                                //data={data.concat(footer)}
                                 exportHeaders
                             >
                                 <DataTable
                                     title="SIC Reports"
                                     columns={columns}
-                                    data={data.concat(footer)}
+                                    //data={data.concat(footer)}
                                     defaultSortFieldID={1}
                                     pagination
                                 //progressPending={isFetching}

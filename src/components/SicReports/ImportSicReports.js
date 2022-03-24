@@ -237,7 +237,7 @@ const ImportSicReports = ({ match }) => {
                                 <DataTable
                                     title="SIC Reports Data"
                                     columns={columns}
-                                    data={sicReportsData}
+                                    //data={sicReportsData}
                                     defaultSortFieldID={1}
                                     pagination
                                     progressPending={isFetching}
