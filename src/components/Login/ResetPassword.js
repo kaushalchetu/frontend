@@ -5,7 +5,6 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { resetPassword, login } from "../../redux/actions/auth";
-import { clearMessage } from "../../redux/actions/message";
 import { logout } from "../../redux/actions/auth";
 
 const ResetPassword = (props) => {
@@ -25,15 +24,6 @@ const ResetPassword = (props) => {
     })
     const [successful, setSuccessful] = useState(false);
 
-    useEffect(() => {
-        dispatch(clearMessage())
-        return () => {
-            dispatch(clearMessage())
-        }
-
-    }, [])
-
-    const { message } = useSelector(state => state.message);
     const { isFetching } = useSelector(state => state.users);
 
     const required = (value) => {
@@ -135,13 +125,6 @@ const ResetPassword = (props) => {
                             <p>Enter your new password below.</p>
                         </div>
                         <Form onSubmit={handleResetPassword} ref={form} className="login__form">
-                            {message && (
-                                <div className="form-group">
-                                    <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
-                                        {message}
-                                    </div>
-                                </div>
-                            )}
                             <div className="txt_field pb-4">
                                 <div className="txt_field__relative-item">
                                     <Input

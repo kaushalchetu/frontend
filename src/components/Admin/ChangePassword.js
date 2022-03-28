@@ -5,7 +5,6 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { useNavigate } from 'react-router-dom'
 import { changePassword } from "../../redux/actions/auth";
-import { clearMessage } from "../../redux/actions/message";
 import { logout } from "../../redux/actions/auth";
 
 const ChangePassword = ({ match }) => {
@@ -26,15 +25,6 @@ const ChangePassword = ({ match }) => {
 
     const { user } = useSelector(state => state.auth);
 
-    useEffect(() => {
-        dispatch(clearMessage())
-        return () => {
-            dispatch(clearMessage())
-        }
-
-    }, [])
-
-    const { message } = useSelector(state => state.message);
     const { isFetching } = useSelector(state => state.users);
 
     const required = (value) => {
@@ -132,13 +122,6 @@ const ChangePassword = ({ match }) => {
                         <div className="col-md-12">
                             <div className="card card-primary">
                                 <Form onSubmit={handleChangePassword} ref={form}>
-                                    {message && (
-                                        <div className="form-group">
-                                            <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
-                                                {message}
-                                            </div>
-                                        </div>
-                                    )}
                                     <div className="card-body">
                                         <div className="row">
                                             <div className="col-sm-3"></div>

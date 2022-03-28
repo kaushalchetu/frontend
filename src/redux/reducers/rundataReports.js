@@ -2,15 +2,13 @@ import {
     FETCHING_RUNDATA_REPORTS_DATA,
     SET_RUNDATA_REPORTS_DATA,
     FETCHING_RUNDATA_REPORTS,
-    SET_RUNDATA_REPORTS,
-    SET_MESSAGE
+    SET_RUNDATA_REPORTS
 } from "../types";
 
 const initialState = {
     rundataReportsData: [],
     rundataReports: [],
-    isFetching: false,
-    message: false
+    isFetching: false
 }
 
 export default function (state = initialState, action) {
@@ -36,11 +34,6 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 rundataReports: payload,
-            };
-        case SET_MESSAGE:
-            return {
-                ...state,
-                message: payload
             };
         default:
             return state;

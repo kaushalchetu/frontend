@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { useNavigate, useParams, Link } from 'react-router-dom'
-import { clearMessage } from "../../redux/actions/message";
 import { getRundataReportsData, importRundataReports } from "../../redux/actions/rundataReports";
 import DataTable from "react-data-table-component";
 import { BASE_URL } from "../../helpers/Constant";   //for multiple import
@@ -38,16 +36,10 @@ const ImportRundataReports = ({ match }) => {
     })
 
     useEffect(() => {
-        dispatch(clearMessage())
         dispatch(getRundataReportsData())
-        return () => {
-            dispatch(clearMessage())
-        }
-
     }, [])
 
     const [successful, setSuccessful] = useState(false);
-    const { message } = useSelector(state => state.message);
 
     const handleImportRundataReports = (e) => {
         e.preventDefault();
@@ -72,7 +64,7 @@ const ImportRundataReports = ({ match }) => {
                         fileName: '',
                         importFileName: ''
                     })
-                    window.location.reload();
+                    //window.location.reload();
                 })
                 .catch(() => {
                     setSuccessful(false);
@@ -105,7 +97,7 @@ const ImportRundataReports = ({ match }) => {
             selector: (row, index) => index + 1,
         },
         {
-            name: "Imported By (Username)",
+            name: "Imported By (User Name)",
             selector: (row) => row.imported_by,
             sortable: true,
         },
@@ -115,7 +107,7 @@ const ImportRundataReports = ({ match }) => {
             sortable: false,
         },
         {
-            name: "Filename",
+            name: "File Name",
             selector: (row) => row.file_name,
             sortable: false,
         },
@@ -125,9 +117,9 @@ const ImportRundataReports = ({ match }) => {
             sortable: true
         },
         {
-            name: "Imported Filename",
+            name: "Imported File Name",
             cell: (row) => (
-                <a href={`${BASE_URL}/hdmdatabase/` + row.imported_filename} className="btn btn-info" download>
+                <a href={`${BASE_URL}/hdmdatabase/` + row.imported_filename} className="btn btn-info btn-sm" download>
                     <i className="right fas fa-download"></i> Download File
                 </a>
             )
@@ -140,12 +132,12 @@ const ImportRundataReports = ({ match }) => {
                 <div className="container-fluid">
                     <div className="row mb-2">
                         <div className="col-sm-6">
-                            <h1>Import Rundata Reports</h1>
+                            <h1>RunData Reports Section</h1>
                         </div>
                         <div className="col-sm-6">
                             <ol className="breadcrumb float-sm-right">
                                 <li className="breadcrumb-item"><a href="#">Home</a></li>
-                                <li className="breadcrumb-item active">Import RunData Reports</li>
+                                <li className="breadcrumb-item active">RunData Reports Section</li>
                             </ol>
                         </div>
                     </div>
@@ -158,23 +150,16 @@ const ImportRundataReports = ({ match }) => {
                         <div className="col-md-12">
                             <div className="card card-primary">
                                 <Form onSubmit={handleImportRundataReports} ref={form}>
-                                    {message && (
-                                        <div className="form-group">
-                                            <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
-                                                {message}
-                                            </div>
-                                        </div>
-                                    )}
                                     <div className="card-body">
                                         <div className="row">
                                             <div className="col-sm-6">
                                                 <div className="form-group">
-                                                    <label htmlFor="lastName">Filename</label>
+                                                    <label htmlFor="lastName">File Name</label>
                                                     <Input
                                                         type="text"
                                                         name="fileName"
                                                         className="form-control"
-                                                        placeholder="Enter Filename"
+                                                        placeholder="Enter File Name"
                                                         disabled={isFetching}
                                                         validations={[required]}
                                                         onChange={handleChange}
@@ -183,7 +168,7 @@ const ImportRundataReports = ({ match }) => {
                                             </div>
                                             <div className="col-sm-6">
                                                 <div className="form-group">
-                                                    <label htmlFor="lastName">Import RunData Reports</label>
+                                                    <label htmlFor="lastName">Import File</label>
                                                     <Input
                                                         type="file"
                                                         accept=".mdb"
@@ -203,9 +188,8 @@ const ImportRundataReports = ({ match }) => {
                                             {loading && (
                                                 <span className="spinner-border spinner-border-sm"></span>
                                             )}
-                                            <span>Submit</span>
+                                            <span>Import</span>
                                         </button>
-
                                         {/* <button type="submit" className="btn btn-primary">Submit</button> */}
                                     </div>
                                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
@@ -227,7 +211,7 @@ const ImportRundataReports = ({ match }) => {
                                     data={rundataReports}
                                 > */}
                                 <DataTable
-                                    title="RunData Reports Data"
+                                    title="Imported Report Lists"
                                     columns={columns}
                                     data={rundataReportsData}
                                     defaultSortFieldID={1}

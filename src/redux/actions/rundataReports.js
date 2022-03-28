@@ -2,21 +2,18 @@ import {
     SET_RUNDATA_REPORTS_DATA,
     FETCHING_RUNDATA_REPORTS_DATA,
     SET_RUNDATA_REPORTS,
-    FETCHING_RUNDATA_REPORTS,
-    SET_MESSAGE
+    FETCHING_RUNDATA_REPORTS
 } from "../types";
-
 import RundataReportService from "../../services/rundataReport.service";
+import { toast } from 'react-toastify';
 
 //Import rundata report code start
 export const importRundataReports = (fields) => (dispatch) => {
     return RundataReportService.importRundataReports(fields).then(
         (response) => {
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
-
+            toast.success(response.data.message, {
+                theme: "colored"
+            })
             return Promise.resolve();
         },
         (error) => {
@@ -27,11 +24,9 @@ export const importRundataReports = (fields) => (dispatch) => {
                 error.message ||
                 error.toString();
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
+            toast.error(message, {
+                theme: "colored"
             });
-
             return Promise.reject();
         }
     );

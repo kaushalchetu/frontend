@@ -3,13 +3,10 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT,
-  SET_MESSAGE,
-  SET_CHANGE_PASSWORD_MESSAGE,
-  SET_FORGOT_PASSWORD_MESSAGE
+  LOGOUT
 } from "../types";
-
 import AuthService from "../../services/auth.service";
+import { toast } from 'react-toastify';
 
 //Register/User create code start
 export const register = (data) => (dispatch) => {
@@ -19,12 +16,9 @@ export const register = (data) => (dispatch) => {
       dispatch({
         type: REGISTER_SUCCESS,
       });
-
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
-
+      toast.success(response.data.message, {
+        theme: "colored"
+      })
       return Promise.resolve();
     },
     (error) => {
@@ -38,12 +32,9 @@ export const register = (data) => (dispatch) => {
       dispatch({
         type: REGISTER_FAIL,
       });
-
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
+      toast.error(message, {
+        theme: "colored"
       });
-
       return Promise.reject();
     }
   );
@@ -58,7 +49,6 @@ export const login = (email, password) => (dispatch) => {
         type: LOGIN_SUCCESS,
         payload: { user: data },
       });
-
       return Promise.resolve();
     },
     (error) => {
@@ -72,12 +62,9 @@ export const login = (email, password) => (dispatch) => {
       dispatch({
         type: LOGIN_FAIL,
       });
-
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
+      toast.error(message, {
+        theme: "colored"
       });
-
       return Promise.reject();
     }
   );
@@ -88,11 +75,9 @@ export const login = (email, password) => (dispatch) => {
 export const forgotPassword = (fields) => (dispatch) => {
   return AuthService.forgotPassword(fields).then(
     (response) => {
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
-
+      toast.success(response.data.message, {
+        theme: "colored"
+      })
       return Promise.resolve();
     },
     (error) => {
@@ -103,11 +88,9 @@ export const forgotPassword = (fields) => (dispatch) => {
         error.message ||
         error.toString();
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
-
+        toast.error(message, {
+          theme: "colored"
+        });
       return Promise.reject();
     }
   );
@@ -118,11 +101,9 @@ export const forgotPassword = (fields) => (dispatch) => {
 export const resetPassword = (id, fields) => (dispatch) => {
   return AuthService.resetPassword(id, fields).then(
     (response) => {
-      dispatch({
-        type: SET_CHANGE_PASSWORD_MESSAGE,
-        payload: response.data.message,
-      });
-
+      toast.success(response.data.message, {
+        theme: "colored"
+      })
       return Promise.resolve();
     },
     (error) => {
@@ -133,11 +114,9 @@ export const resetPassword = (id, fields) => (dispatch) => {
         error.message ||
         error.toString();
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
-
+        toast.error(message, {
+          theme: "colored"
+        });
       return Promise.reject();
     }
   );
@@ -148,11 +127,9 @@ export const resetPassword = (id, fields) => (dispatch) => {
 export const updateProfile = (fields) => (dispatch) => {
   return AuthService.updateProfile(fields).then(
     (response) => {
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
-
+      toast.success(response.data.message, {
+        theme: "colored"
+      })
       const { data } = response.data
 
       const user = JSON.parse(localStorage.getItem("user"))
@@ -177,11 +154,9 @@ export const updateProfile = (fields) => (dispatch) => {
         error.message ||
         error.toString();
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
-
+        toast.error(message, {
+          theme: "colored"
+        });
       return Promise.reject();
     }
   );
@@ -192,11 +167,9 @@ export const updateProfile = (fields) => (dispatch) => {
 export const changePassword = (fields) => (dispatch) => {
   return AuthService.changePassword(fields).then(
     (response) => {
-      dispatch({
-        type: SET_CHANGE_PASSWORD_MESSAGE,
-        payload: response.data.message,
-      });
-
+      toast.success(response.data.message, {
+        theme: "colored"
+      })
       return Promise.resolve();
     },
     (error) => {
@@ -207,11 +180,9 @@ export const changePassword = (fields) => (dispatch) => {
         error.message ||
         error.toString();
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
-
+        toast.error(message, {
+          theme: "colored"
+        });
       return Promise.reject();
     }
   );

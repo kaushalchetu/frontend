@@ -2,7 +2,6 @@ import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { logout } from "../redux/actions/auth"
-import { clearMessage } from "../redux/actions/message"
 
 const AuthVerify = () => {
     const location = useLocation();
@@ -15,7 +14,6 @@ const AuthVerify = () => {
             const decodedJwt = parseJwt(token);
             //console.log('is token expired', decodedJwt.exp * 1000 < Date.now(), '==>', decodedJwt.exp * 1000, Date.now())
             if (decodedJwt.exp * 1000 < Date.now()) {
-                dispatch(clearMessage());
                 dispatch(logout());
                 navigate("/");
                 window.location.reload()

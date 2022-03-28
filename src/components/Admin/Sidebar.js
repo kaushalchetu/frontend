@@ -16,106 +16,117 @@ const Sidebar = () => {
                     <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         {user.role_id === 1 ?
                             <>
-                                <li className="nav-item">
-                                    <Link to="#" className="nav-link">
-                                        <i className="nav-icon fas fa-users"></i>
-                                        <p>
-                                            Users
-                                            <i className="right fas fa-angle-left"></i>
-                                        </p>
-                                    </Link>
-                                    <ul className="nav nav-treeview">
-                                        <li className="nav-item">
-                                            <Link to="/users" className="nav-link">
-                                                <i className="far fa-circle nav-icon"></i>
-                                                <p>Manage User</p>
-                                            </Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link to="/users/add" className="nav-link">
-                                                <i className="far fa-circle nav-icon"></i>
-                                                <p>Create User</p>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="#" className="nav-link">
-                                        <i className="nav-icon fas fa-user"></i>
-                                        <p>
-                                            Roles
-                                            <i className="right fas fa-angle-left"></i>
-                                        </p>
-                                    </Link>
-                                    <ul className="nav nav-treeview">
-                                        <li className="nav-item">
-                                            <Link to="/roles" className="nav-link">
-                                                <i className="far fa-circle nav-icon"></i>
-                                                <p>Manage Role</p>
-                                            </Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link to="/roles/add" className="nav-link">
-                                                <i className="far fa-circle nav-icon"></i>
-                                                <p>Create Role</p>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </>
-                            :
-                            null}
-                        <li className="nav-item">
-                            <Link to="#" className="nav-link">
-                                <i className="nav-icon fas fa-database"></i>
-                                <p>
-                                    Reports
-                                    <i className="right fas fa-angle-left"></i>
-                                </p>
-                            </Link>
-                            <ul className="nav nav-treeview">
-                                <li className="nav-item">
-                                    <Link to="/import/rundata/reports" className="nav-link">
-                                        <i className="far fa-circle nav-icon"></i>
-                                        <p>Import RunData Report</p>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/generate/rundata/reports" className="nav-link">
-                                        <i className="far fa-circle nav-icon"></i>
-                                        <p>Generate RunData Report</p>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/import/sic/reports" className="nav-link">
-                                        <i className="far fa-circle nav-icon"></i>
-                                        <p>Import SIC Report</p>
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/generate/sic/reports" className="nav-link">
-                                        <i className="far fa-circle nav-icon"></i>
-                                        <p>Generate SIC Report</p>
-                                    </Link>
-                                </li>
-                            </ul>
-                        </li>
-                        {/* <li className="nav-item">
-                            <Link to="/reports" className="nav-link">
-                                <i className="nav-icon fas fa-database"></i>
-                                <p>
-                                    Reports
-                                </p>
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/import/reports" className="nav-link">
-                                <i className="nav-icon fas fa-file"></i>
-                                <p>
-                                    Import Reports
-                                </p>
-                            </Link>
-                        </li> */}
+                            <li className="nav-item">
+                                <Link to="#" className="nav-link">
+                                    <i className="nav-icon fas fa-users"></i>
+                                    <p>
+                                        Users
+                                        <i className="right fas fa-angle-left"></i>
+                                    </p>
+                                </Link>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <Link to="/users" className="nav-link">
+                                            <i className="far fa-circle nav-icon"></i>
+                                            <p>Manage User</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/users/add" className="nav-link">
+                                            <i className="far fa-circle nav-icon"></i>
+                                            <p>Create User</p>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="#" className="nav-link">
+                                    <i className="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Roles
+                                        <i className="right fas fa-angle-left"></i>
+                                    </p>
+                                </Link>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <Link to="/roles" className="nav-link">
+                                            <i className="far fa-circle nav-icon"></i>
+                                            <p>Manage Role</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/roles/add" className="nav-link">
+                                            <i className="far fa-circle nav-icon"></i>
+                                            <p>Create Role</p>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                        </>
+                        :
+                        null}
+                            <li className="nav-item">
+                                <Link to="#" className="nav-link">
+                                    <i className="nav-icon fas fa-database"></i>
+                                    <p>
+                                        RunData Reports
+                                        <i className="right fas fa-angle-left"></i>
+                                    </p>
+                                </Link>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <Link to="/import/rundata/reports" className="nav-link">
+                                            <i className="far fa-circle nav-icon"></i>
+                                            <p>Import</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/generate/rundata/reports" className="nav-link">
+                                            <i className="far fa-circle nav-icon"></i>
+                                            <p>Generate</p>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="#" className="nav-link">
+                                    <i className="nav-icon fas fa-list"></i>
+                                    <p>
+                                        SIC Reports
+                                        <i className="right fas fa-angle-left"></i>
+                                    </p>
+                                </Link>
+                                <ul className="nav nav-treeview">
+                                    <li className="nav-item">
+                                        <Link to="/import/sic/reports" className="nav-link">
+                                            <i className="far fa-circle nav-icon"></i>
+                                            <p>Import</p>
+                                        </Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/generate/sic/reports" className="nav-link">
+                                            <i className="far fa-circle nav-icon"></i>
+                                            <p>Generate</p>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            {/* <li className="nav-item">
+                                <Link to="/reports" className="nav-link">
+                                    <i className="nav-icon fas fa-database"></i>
+                                    <p>
+                                        Reports
+                                    </p>
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/import/reports" className="nav-link">
+                                    <i className="nav-icon fas fa-file"></i>
+                                    <p>
+                                        Import Reports
+                                    </p>
+                                </Link>
+                            </li> */}
                     </ul>
                 </nav>
             </div>

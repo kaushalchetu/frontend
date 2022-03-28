@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllUsers, getAllRolesOptions, deleteUser, changeUserStatus } from "../../redux/actions/users";
 import DataTable from "react-data-table-component";
 import DataTableExtensions from "react-data-table-component-extensions";
 //import "react-data-table-component-extensions/dist/index.css";
-import { clearMessage } from "../../redux/actions/message";
 import Swal from 'sweetalert2/dist/sweetalert2'
 import 'sweetalert2/src/sweetalert2.scss'
 import classNames from "classnames";
@@ -17,7 +16,6 @@ const Users = () => {
   const [userStatus, setUserStatus] = useState({})
   const [isChangingStatus, setChangeStatus] = useState(false)
 
-  const { message } = useSelector(state => state.message);
   const [successful, setSuccessful] = useState(false);
 
   const handleStatusChange = (event, id) => {
@@ -118,7 +116,7 @@ const Users = () => {
       name: "Action",
       cell: (row) => (
         <div>
-          <Link to={`/users/edit/${row.id}`} className="btn btn-info">
+          <Link to={`/users/edit/${row.id}`} className="btn btn-info btn-sm">
             <i className="right fas fa-edit"></i> Edit
           </Link>
           {/* <button type="button" onClick={() => handleDelete(row.id)} className="btn btn-danger">
@@ -148,9 +146,6 @@ const Users = () => {
   useEffect(() => {
     dispatch(getAllUsers())
     dispatch(getAllRolesOptions())
-    return () => {
-      dispatch(clearMessage())
-    }
   }, [])
 
   useEffect(() => {
@@ -164,13 +159,6 @@ const Users = () => {
   return (
     <div className="main-content">
       <div className="col-md-12">
-        {message && (
-          <div className="form-group">
-            <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
-              {message}
-            </div>
-          </div>
-        )}
         <Link to='/users/add' className="btn btn-primary create-user"><i className="right fas fa-plus-circle"></i> Create User</Link>
         <div className="custom-data-table">
           {/* <DataTableExtensions

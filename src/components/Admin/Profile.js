@@ -1,15 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { getAllRolesOptions } from "../../redux/actions/users";
 import { updateProfile } from "../../redux/actions/auth";
-import { clearMessage } from "../../redux/actions/message";
 import { BASE_URL } from "../../helpers/Constant";   //for multiple import
 // import BASE_URL from "../../helpers/Constant";   //for single import
 
@@ -89,7 +87,6 @@ const Profile = ({ match }) => {
   const { user } = useSelector(state => state.auth);
 
   useEffect(() => {
-    dispatch(clearMessage())
     dispatch(getAllRolesOptions())
     setFields({
       id: user.id,
@@ -101,20 +98,13 @@ const Profile = ({ match }) => {
       profileImage: user.profile_image,
       roleName: user.role_name
     })
-    return () => {
-      dispatch(clearMessage())
-    }
-
   }, [])
 
-  const { message } = useSelector(state => state.message);
   const { isFetching } = useSelector(state => state.users);
 
   const handleProfile = (e) => {
     e.preventDefault();
-
     //setSuccessful(false);
-
     form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
       setLoading(true);
@@ -158,7 +148,6 @@ const Profile = ({ match }) => {
       ...fields,
       [event.target.name]: value
     })
-
   }
 
   return (
@@ -185,13 +174,6 @@ const Profile = ({ match }) => {
             <div className="col-md-12">
               <div className="card card-primary">
                 <Form onSubmit={handleProfile} ref={form}>
-                  {message && (
-                    <div className="form-group">
-                      <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
-                        {message}
-                      </div>
-                    </div>
-                  )}
                   <div className="card-body">
                     <div className="row">
                       <div className="col-sm-6">

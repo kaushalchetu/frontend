@@ -4,11 +4,10 @@ import {
     SET_SIC_REPORTS_DATA,
     FETCHING_SIC_REPORTS_DATA,
     SET_SIC_REPORTS,
-    FETCHING_SIC_REPORTS,
-    SET_MESSAGE
+    FETCHING_SIC_REPORTS
 } from "../types";
-
 import SicReportService from "../../services/sicReport.service";
+import { toast } from 'react-toastify';
 
 //Get all sic series name code start
 export const getAllSicsOptions = () => (dispatch) => {
@@ -47,11 +46,9 @@ export const getAllSicsOptions = () => (dispatch) => {
 export const importSicReports = (fields) => (dispatch) => {
     return SicReportService.importSicReports(fields).then(
         (response) => {
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
-
+            toast.success(response.data.message, {
+                theme: "colored"
+            })
             return Promise.resolve();
         },
         (error) => {
@@ -62,11 +59,9 @@ export const importSicReports = (fields) => (dispatch) => {
                 error.message ||
                 error.toString();
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
+            toast.error(message, {
+                theme: "colored"
             });
-
             return Promise.reject();
         }
     );

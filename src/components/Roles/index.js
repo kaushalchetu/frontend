@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllRoles, changeRoleStatus } from "../../redux/actions/roles";
 import DataTable from "react-data-table-component";
-import { clearMessage } from "../../redux/actions/message";
 import classNames from "classnames";
 
 const Roles = () => {
@@ -12,7 +11,6 @@ const Roles = () => {
     const [roleStatus, setRoleStatus] = useState({})
     const [isChangingStatus, setChangeStatus] = useState(false)
 
-    const { message } = useSelector(state => state.message);
     const [successful, setSuccessful] = useState(false);
 
     const handleStatusChange = (event, id) => {
@@ -68,7 +66,7 @@ const Roles = () => {
                 //     </p>
                 // </Link>
 
-                <Link to={`/roles/edit/${row.id}`} className="btn btn-info">
+                <Link to={`/roles/edit/${row.id}`} className="btn btn-info btn-sm">
                     <i className="right fas fa-edit"></i> Edit
                 </Link>
             )
@@ -97,9 +95,6 @@ const Roles = () => {
 
     useEffect(() => {
         dispatch(getAllRoles())
-        return () => {
-            dispatch(clearMessage())
-        }
     }, [])
 
     useEffect(() => {
@@ -113,13 +108,6 @@ const Roles = () => {
     return (
         <div className="main-content">
             <div className="col-md-12">
-                {message && (
-                    <div className="form-group">
-                        <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
-                            {message}
-                        </div>
-                    </div>
-                )}
                 <Link to='/roles/add' className="btn btn-primary create-user"><i className="right fas fa-plus-circle"></i> Create Role</Link>
                 <div className="custom-data-table">
                     <DataTable

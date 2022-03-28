@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+//import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { createBrowserHistory } from "history";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './sass/_main.scss';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from './components/Layout';
 import Login from "./components/Login/index";
 import ForgotPassword from "./components/Login/ForgotPassword";
@@ -14,8 +16,6 @@ import Users from "./components/Users";
 import Roles from "./components/Roles";
 import UserDetails from "./components/Users/UserDetails";
 import RoleDetails from "./components/Roles/RoleDetails";
-//import Reports from "./components/Reports";
-//import ImportReports from "./components/ReportDataLists";
 import AuthVerify from "./components/AuthVerify";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ImportRundataReports from "./components/RundataReports/ImportRundataReports";
@@ -41,6 +41,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ToastContainer />
       <AuthVerify />
       {!currentUser ? (
         <Routes>

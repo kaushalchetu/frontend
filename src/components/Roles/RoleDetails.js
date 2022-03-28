@@ -1,13 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import queryString from 'query-string';
-import { useHistory, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { createRole, getRole, clearRole, updateRole } from "../../redux/actions/roles";
-import { clearMessage } from "../../redux/actions/message";
 
 //Validations code start
 const required = (value) => {
@@ -34,14 +31,13 @@ const vname = (value) => {
 const RoleDetails = ({ match }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
-    //const history = useHistory();
+
     const navigate = useNavigate();
 
     const { id } = useParams();
     const form = useRef();
     const checkBtn = useRef();
 
-    const { message } = useSelector(state => state.message);
     const { isFetching, role } = useSelector(state => state.roles);
 
     const [fields, setFields] = useState({
@@ -51,15 +47,11 @@ const RoleDetails = ({ match }) => {
     const [successful, setSuccessful] = useState(false);
 
     useEffect(() => {
-        dispatch(clearMessage())
         if (id) {
             dispatch(getRole(id))
             return () => {
                 dispatch(clearRole())
             }
-        }
-        return () => {
-            dispatch(clearMessage())
         }
     }, [])
 
@@ -74,9 +66,6 @@ const RoleDetails = ({ match }) => {
             setFields({
                 name: ''
             })
-        }
-        return () => {
-            dispatch(clearMessage())
         }
     }, [role])
 
@@ -113,6 +102,7 @@ const RoleDetails = ({ match }) => {
 
                         setTimeout(() => {
                             //history.push("/roles");
+                            // toast.success("wow it easy")
                             navigate("/roles");
                         }, 1000);
 
@@ -156,13 +146,6 @@ const RoleDetails = ({ match }) => {
                         <div className="col-md-12">
                             <div className="card card-primary">
                                 <Form onSubmit={handleRole} ref={form}>
-                                    {message && (
-                                        <div className="form-group">
-                                            <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
-                                                {message}
-                                            </div>
-                                        </div>
-                                    )}
                                     <div className="row">
                                         <div className="col-sm-3"></div>
                                         <div className="col-sm-6">

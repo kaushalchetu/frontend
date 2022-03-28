@@ -1,15 +1,14 @@
 import {
     ROLE_SUCCESS,
     ROLE_FAIL,
-    SET_MESSAGE,
     GET_ROLES_SUCCESS,
     GET_ROLES_FAIL,
     SET_ROLES,
     FETCHING_ROLES,
     SET_ROLE
 } from "../types";
-
 import RoleService from "../../services/role.service";
+import { toast } from 'react-toastify';
 
 //Role create code start
 export const createRole = (data) => (dispatch) => {
@@ -19,12 +18,9 @@ export const createRole = (data) => (dispatch) => {
             dispatch({
                 type: ROLE_SUCCESS,
             });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
-
+            toast.success(response.data.message, {
+                theme: "colored"
+            })
             return Promise.resolve();
         },
         (error) => {
@@ -38,12 +34,9 @@ export const createRole = (data) => (dispatch) => {
             dispatch({
                 type: ROLE_FAIL,
             });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
+            toast.error(message, {
+                theme: "colored"
             });
-
             return Promise.reject();
         }
     );
@@ -152,11 +145,9 @@ export const getRole = id => (dispatch) => {
 export const updateRole = (id, fields) => (dispatch) => {
     return RoleService.updateRole(id, fields).then(
         (response) => {
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
-
+            toast.success(response.data.message, {
+                theme: "colored"
+            })
             return Promise.resolve();
         },
         (error) => {
@@ -167,11 +158,9 @@ export const updateRole = (id, fields) => (dispatch) => {
                 error.message ||
                 error.toString();
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
+            toast.error(message, {
+                theme: "colored"
             });
-
             return Promise.reject();
         }
     );
@@ -191,11 +180,9 @@ export const clearRole = () => (dispatch) => {
 export const changeRoleStatus = (id) => (dispatch) => {
     return RoleService.changeRoleStatus(id).then(
         (response) => {
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
-
+            toast.success(response.data.message, {
+                theme: "colored"
+            })
             return Promise.resolve();
         },
         (error) => {
@@ -206,11 +193,9 @@ export const changeRoleStatus = (id) => (dispatch) => {
                 error.message ||
                 error.toString();
 
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
+            toast.error(message, {
+                theme: "colored"
             });
-
             return Promise.reject();
         }
     );

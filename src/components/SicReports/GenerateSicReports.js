@@ -1,10 +1,8 @@
-import React, { useState, useRef, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { generateSicReports } from "../../redux/actions/sicReports";
 import DataTable from "react-data-table-component";
 import DataTableExtensions from "react-data-table-component-extensions";
-import { clearMessage } from "../../redux/actions/message";
 import { reportSelector, headerSelector, footerSelector } from "../../redux/selectors/reportSelectors";
 import "react-data-table-component-extensions/dist/index.css";
 
@@ -12,9 +10,6 @@ const GenerateSicReports = () => {
 
     const [show, setShow] = useState(false);
     const dispatch = useDispatch();
-
-    const { message } = useSelector(state => state.message);
-    const [successful, setSuccessful] = useState(false);
 
     const data = useSelector((state) =>
         reportSelector(state.sicReports.sicReports)
@@ -40,22 +35,12 @@ const GenerateSicReports = () => {
 
     useEffect(() => {
         dispatch(generateSicReports())
-        return () => {
-            dispatch(clearMessage())
-        }
     }, [])
 
     return (
 
         <div className="main-content">
             <div className="col-md-12">
-                {message && (
-                    <div className="form-group">
-                        <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
-                            {message}
-                        </div>
-                    </div>
-                )}
                 <button onClick={() => setShow(prev => !prev)} className="btn btn-primary" style={{ marginLeft: '45%' }}><i className="right fas fa-file"></i> Generate SIC Reports</button>
                 <div className="custom-data-table">
                     {show &&
@@ -71,8 +56,8 @@ const GenerateSicReports = () => {
                                     //data={data.concat(footer)}
                                     defaultSortFieldID={1}
                                     pagination
-                                //progressPending={isFetching}
-                                //highlightOnHover
+                                    //progressPending={isFetching}
+                                    //highlightOnHover
                                 />
                             </DataTableExtensions>
                         )

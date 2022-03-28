@@ -1,7 +1,6 @@
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  SET_MESSAGE,
   GET_USERS_SUCCESS,
   GET_USERS_FAIL,
   SET_USERS,
@@ -9,9 +8,9 @@ import {
   SET_ROLE_OPTIONS,
   SET_USER
 } from "../types";
-
 import UserService from "../../services/user.service";
 import AuthService from "../../services/auth.service";
+import { toast } from 'react-toastify';
 
 //User create code start
 export const createUser = (data) => (dispatch) => {
@@ -20,12 +19,9 @@ export const createUser = (data) => (dispatch) => {
       dispatch({
         type: REGISTER_SUCCESS,
       });
-
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
-
+      toast.success(response.data.message, {
+        theme: "colored"
+      })
       return Promise.resolve();
     },
     (error) => {
@@ -40,11 +36,9 @@ export const createUser = (data) => (dispatch) => {
         type: REGISTER_FAIL,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
+      toast.error(message, {
+        theme: "colored"
       });
-
       return Promise.reject();
     }
   );
@@ -186,11 +180,9 @@ export const getUser = id => (dispatch) => {
 export const updateUser = (id, fields) => (dispatch) => {
   return UserService.updateUser(id, fields).then(
     (response) => {
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
-
+      toast.success(response.data.message, {
+        theme: "colored"
+      })
       return Promise.resolve();
     },
     (error) => {
@@ -201,11 +193,9 @@ export const updateUser = (id, fields) => (dispatch) => {
         error.message ||
         error.toString();
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
-
+        toast.error(message, {
+          theme: "colored"
+        });
       return Promise.reject();
     }
   );
@@ -216,11 +206,9 @@ export const updateUser = (id, fields) => (dispatch) => {
 export const deleteUser = id => (dispatch) => {
   return UserService.deleteUser(id).then(
     (response) => {
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
-
+      toast.success(response.data.message, {
+        theme: "colored"
+      })
       return Promise.resolve();
     },
     (error) => {
@@ -231,9 +219,8 @@ export const deleteUser = id => (dispatch) => {
         error.message ||
         error.toString();
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
+      toast.error(message, {
+        theme: "colored"
       });
       return Promise.reject();
     }
@@ -254,11 +241,9 @@ export const clearUser = () => (dispatch) => {
 export const changeUserStatus = (id) => (dispatch) => {
   return UserService.changeUserStatus(id).then(
     (response) => {
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
-
+      toast.success(response.data.message, {
+        theme: "colored"
+      })
       return Promise.resolve();
     },
     (error) => {
@@ -269,11 +254,9 @@ export const changeUserStatus = (id) => (dispatch) => {
         error.message ||
         error.toString();
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
-
+        toast.error(message, {
+          theme: "colored"
+        });
       return Promise.reject();
     }
   );

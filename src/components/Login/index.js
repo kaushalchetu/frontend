@@ -1,15 +1,11 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { Redirect } from 'react-router-dom';
-
 import { Link, Navigate, useNavigate } from "react-router-dom";
-
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-
 import { login } from "../../redux/actions/auth";
-import { clearMessage } from "../../redux/actions/message";
 
 //Validations code start
 const required = (value) => {
@@ -33,7 +29,6 @@ const Login = (props) => {
     const [loading, setLoading] = useState(false);
 
     const { isLoggedIn } = useSelector(state => state.auth);
-    const { message, changePasswordMessage } = useSelector(state => state.message);
 
     const dispatch = useDispatch();
 
@@ -100,20 +95,6 @@ const Login = (props) => {
                             <h2>Get Started</h2>
                             <p>Welcome back login with your data that you entered during registration.</p>
                         </div>
-                        {message && (
-                            <div className="form-group">
-                                <div className="alert alert-danger" role="alert">
-                                    {message}
-                                </div>
-                            </div>
-                        )}
-                        {changePasswordMessage && (
-                            <div className="form-group">
-                                <div className="alert alert-success" role="alert">
-                                    {changePasswordMessage}
-                                </div>
-                            </div>
-                        )}
                         <Form onSubmit={handleLogin} ref={form} className="login__form">
                             <div className="txt_field pb-4">
                                 <div className="txt_field__relative-item">

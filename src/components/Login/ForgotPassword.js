@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -41,7 +41,6 @@ const ForgotPassword = (props) => {
         email: '',
     })
     const [successful, setSuccessful] = useState(false);
-    const { message } = useSelector(state => state.message);
 
     const handleForgotPassword = (e) => {
         e.preventDefault();
@@ -103,13 +102,6 @@ const ForgotPassword = (props) => {
                             <p>To reset your password, enter the registered e-mail address and we will send you a password reset link on your e-mail.</p>
                         </div>
                         <Form onSubmit={handleForgotPassword} ref={form} className="login__form">
-                            {message && (
-                                <div className="form-group">
-                                    <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
-                                        {message}
-                                    </div>
-                                </div>
-                            )}
                             <div className="txt_field pb-4">
                                 <div className="txt_field__relative-item">
                                     <Input

@@ -1,15 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import Select from "react-validation/build/select";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import queryString from 'query-string';
 import { useNavigate, useParams } from 'react-router-dom'
 import { createUser, getAllRolesOptions, getUser, clearUser, updateUser } from "../../redux/actions/users";
-import { clearMessage } from "../../redux/actions/message";
 
 //Validations code start
 const required = (value) => {
@@ -96,7 +93,6 @@ const UserDetails = ({ match }) => {
   const { roleOptions, user } = useSelector(state => state.users);
 
   useEffect(() => {
-    dispatch(clearMessage())
     dispatch(getAllRolesOptions())
     if (id) {
       dispatch(getUser(id))
@@ -104,10 +100,6 @@ const UserDetails = ({ match }) => {
         dispatch(clearUser())
       }
     }
-    return () => {
-      dispatch(clearMessage())
-    }
-
   }, [])
 
   useEffect(() => {
@@ -131,12 +123,8 @@ const UserDetails = ({ match }) => {
         password: ''
       })
     }
-    return () => {
-      dispatch(clearMessage())
-    }
   }, [user])
 
-  const { message } = useSelector(state => state.message);
   const { isFetching } = useSelector(state => state.users);
 
   const handleRegister = (e) => {
@@ -219,13 +207,6 @@ const UserDetails = ({ match }) => {
             <div className="col-md-12">
               <div className="card card-primary">
                 <Form onSubmit={handleRegister} ref={form}>
-                  {message && (
-                    <div className="form-group">
-                      <div className={successful ? "alert alert-success custom-alert" : "alert alert-danger custom-alert"} role="alert">
-                        {message}
-                      </div>
-                    </div>
-                  )}
                   <div className="card-body">
                     <div className="row">
                       <div className="col-sm-6">
