@@ -137,6 +137,7 @@ const ResetPassword = (props) => {
                                         validations={[required, vpassword]}
                                         disabled={isFetching}
                                         ref={newPassword}
+                                        autoFocus="autofocus"
                                     />
                                     <div className="txt_field__relative-item--absolute-mail txt_field__relative-item--lock-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25.769" height="33.822" viewBox="0 0 25.769 33.822">

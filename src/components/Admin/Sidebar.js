@@ -65,68 +65,66 @@ const Sidebar = () => {
                         </>
                         :
                         null}
-                            <li className="nav-item">
-                                <Link to="#" className="nav-link">
-                                    <i className="nav-icon fas fa-database"></i>
-                                    <p>
-                                        RunData Reports
-                                        <i className="right fas fa-angle-left"></i>
-                                    </p>
-                                </Link>
-                                <ul className="nav nav-treeview">
-                                    <li className="nav-item">
-                                        <Link to="/import/rundata/reports" className="nav-link">
-                                            <i className="far fa-circle nav-icon"></i>
-                                            <p>Import</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/generate/rundata/reports" className="nav-link">
-                                            <i className="far fa-circle nav-icon"></i>
-                                            <p>Generate</p>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="#" className="nav-link">
-                                    <i className="nav-icon fas fa-list"></i>
-                                    <p>
-                                        SIC Reports
-                                        <i className="right fas fa-angle-left"></i>
-                                    </p>
-                                </Link>
-                                <ul className="nav nav-treeview">
-                                    <li className="nav-item">
-                                        <Link to="/import/sic/reports" className="nav-link">
-                                            <i className="far fa-circle nav-icon"></i>
-                                            <p>Import</p>
-                                        </Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/generate/sic/reports" className="nav-link">
-                                            <i className="far fa-circle nav-icon"></i>
-                                            <p>Generate</p>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </li>
-                            {/* <li className="nav-item">
-                                <Link to="/reports" className="nav-link">
-                                    <i className="nav-icon fas fa-database"></i>
-                                    <p>
-                                        Reports
-                                    </p>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/import/reports" className="nav-link">
-                                    <i className="nav-icon fas fa-file"></i>
-                                    <p>
-                                        Import Reports
-                                    </p>
-                                </Link>
-                            </li> */}
+                        <li className="nav-item">
+                            <Link to="#" className="nav-link">
+                                <i className="nav-icon fas fa-database"></i>
+                                <p>
+                                    RunData Reports
+                                    <i className="right fas fa-angle-left"></i>
+                                </p>
+                            </Link>
+                            <ul className="nav nav-treeview">
+                                <li className="nav-item">
+                                    <Link to="/import/rundata/reports" className="nav-link">
+                                        <i className="far fa-circle nav-icon"></i>
+                                        <p>Import</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/generate/rundata/reports" className="nav-link">
+                                        <i className="far fa-circle nav-icon"></i>
+                                        <p>Generate</p>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="#" className="nav-link">
+                                <i className="nav-icon fas fa-list"></i>
+                                <p>
+                                    SIC Reports
+                                    <i className="right fas fa-angle-left"></i>
+                                </p>
+                            </Link>
+                            <ul className="nav nav-treeview">
+                                <li className="nav-item">
+                                    <Link to="/import/sic/reports" className="nav-link">
+                                        <i className="far fa-circle nav-icon"></i>
+                                        <p>Import</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/generate/sic/reports" className="nav-link">
+                                        <i className="far fa-circle nav-icon"></i>
+                                        <p>Generate</p>
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/sic/graph/charts" className="nav-link">
+                                        <i className="far fa-circle nav-icon"></i>
+                                        <p>Graph Charts</p>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </li>
+                        {/* <li className="nav-item">
+                            <Link to="/graph/charts" className="nav-link">
+                                <i className="nav-icon fas fa-signal"></i>
+                                <p>
+                                    Graph Charts
+                                </p>
+                            </Link>
+                        </li> */}
                     </ul>
                 </nav>
             </div>

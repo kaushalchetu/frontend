@@ -135,7 +135,7 @@ const Profile = ({ match }) => {
   };
 
   const handleChange = event => {
-    const value = event.target.name == 'phoneNo' ? event.target.value.replace(/\D/g, "") : event.target.value;
+    const value = event.target.name == 'phoneNo' ? event.target.value.replace(/\D/g, "") : event.target.name == 'firstName' ? event.target.value.replace(/[^\w\s]/gi, "") : event.target.name == 'lastName' ? event.target.value.replace(/[^\w\s]/gi, "") : event.target.value;
     setFields({
       ...fields,
       [event.target.name]: value

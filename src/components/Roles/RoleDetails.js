@@ -116,9 +116,11 @@ const RoleDetails = ({ match }) => {
     };
 
     const handleChange = event => {
+        const value = event.target.name == 'name' ? event.target.value.replace(/[^\w\s]/gi, "") : event.target.value;
         setFields({
             ...fields,
-            [event.target.name]: event.target.value
+            //[event.target.name]: event.target.value
+            [event.target.name]: value
         })
     }
 

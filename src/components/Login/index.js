@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 //import { Redirect } from 'react-router-dom';
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { isEmail } from "validator";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -17,6 +18,26 @@ const required = (value) => {
         );
     }
 };
+
+const validEmail = (value) => {
+    if (!isEmail(value)) {
+      return (
+        <div className="error text-danger" role="alert">
+          This is not a valid email.
+        </div>
+      );
+    }
+};
+
+const vpassword = (value) => {
+    if (value.length < 6 || value.length > 40) {
+      return (
+        <div className="error text-danger" role="alert">
+          The password must be between 6 and 40 characters.
+        </div>
+      );
+    }
+  };
 //Validations code end
 
 const Login = (props) => {
@@ -105,7 +126,8 @@ const Login = (props) => {
                                         placeholder="Username"
                                         value={email}
                                         onChange={onChangeEmail}
-                                        validations={[required]}
+                                        validations={[required, validEmail]}
+                                        autoFocus="autofocus"
                                     />
                                     <div className="txt_field__relative-item--absolute-mail">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24">
@@ -123,7 +145,7 @@ const Login = (props) => {
                                         name="password"
                                         value={password}
                                         onChange={onChangePassword}
-                                        validations={[required]}
+                                        validations={[required, vpassword]}
                                     />
                                     <div className="txt_field__relative-item--absolute-mail txt_field__relative-item--lock-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="25.769" height="33.822" viewBox="0 0 25.769 33.822">
@@ -134,7 +156,7 @@ const Login = (props) => {
                             </div>
                             <div className="d-flex justify-content-between align-items-center pb-3 pt-3">
                                 <div>
-                                    <div className="login__round">
+                                    <div className="login__round" style={{ display: "none" }}>
                                         <input type="checkbox" defaultChecked id="checkbox" />
                                         <label htmlFor="checkbox"></label>
                                         <span>Remember</span>

@@ -163,6 +163,7 @@ const ImportRundataReports = ({ match }) => {
                                                         disabled={isFetching}
                                                         validations={[required]}
                                                         onChange={handleChange}
+                                                        value={fields.fileName}
                                                     />
                                                 </div>
                                             </div>

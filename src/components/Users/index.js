@@ -116,7 +116,7 @@ const Users = () => {
       name: "Action",
       cell: (row) => (
         <div>
-          <Link to={`/users/edit/${row.id}`} className="btn btn-info btn-sm">
+          <Link to={`/users/edit/${row.id}`} className="btn btn-primary btn-sm">
             <i className="right fas fa-edit"></i> Edit
           </Link>
           {/* <button type="button" onClick={() => handleDelete(row.id)} className="btn btn-danger">

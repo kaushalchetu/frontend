@@ -112,6 +112,7 @@ const ForgotPassword = (props) => {
                                         value={fields.email}
                                         onChange={handleChange}
                                         validations={[required, validEmail]}
+                                        autoFocus="autofocus"
                                     />
                                     <div className="txt_field__relative-item--absolute-mail">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="24" viewBox="0 0 30 24">

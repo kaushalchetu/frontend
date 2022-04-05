@@ -3,14 +3,17 @@ import {
     FETCHING_SIC_REPORTS_DATA,
     SET_SIC_REPORTS_DATA,
     FETCHING_SIC_REPORTS,
-    SET_SIC_REPORTS
+    SET_SIC_REPORTS,
+    FETCHING_SIC_GRAPH_CHARTS,
+    SET_SIC_GRAPH_CHARTS
 } from "../types";
 
 const initialState = {
     sicOptions: [],
     sicReportsData: [],
     sicReports: [],
-    isFetching: false
+    isFetching: false,
+    sicGraphCharts: []
 }
 
 export default function (state = initialState, action) {
@@ -41,6 +44,16 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 sicReports: payload,
+            };
+        case FETCHING_SIC_GRAPH_CHARTS:
+            return {
+                ...state,
+                isFetching: payload,
+            };
+        case SET_SIC_GRAPH_CHARTS:
+            return {
+                ...state,
+                sicGraphCharts: payload,
             };
         default:
             return state;

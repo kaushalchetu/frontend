@@ -22,6 +22,7 @@ import ImportRundataReports from "./components/RundataReports/ImportRundataRepor
 import GenerateRundataReports from "./components/RundataReports/GenerateRundataReports";
 import ImportSicReports from "./components/SicReports/ImportSicReports";
 import GenerateSicReports from "./components/SicReports/GenerateSicReports";
+import SicGraphCharts from "./components/SicReports/SicGraphCharts";
 
 const history = createBrowserHistory();
 
@@ -78,6 +79,7 @@ function App() {
             <Route path="/generate/rundata/reports" element={<GenerateRundataReports />} />
             <Route path="/import/sic/reports" element={<ImportSicReports />} />
             <Route path="/generate/sic/reports" element={<GenerateSicReports />} />
+            <Route path="/sic/graph/charts" element={<SicGraphCharts />} />
           </Routes>
         </Layout>
       )}

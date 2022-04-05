@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllRoles, changeRoleStatus } from "../../redux/actions/roles";
@@ -20,12 +20,10 @@ const Roles = () => {
             setTimeout(() => {
                 setChangeStatus(false)
                 dispatch(getAllRoles())
-
             }, 1000);
             setSuccessful(true);
         })
             .catch(() => {
-
                 setChangeStatus(false)
                 setSuccessful(false);
             })
@@ -66,7 +64,7 @@ const Roles = () => {
                 //     </p>
                 // </Link>
 
-                <Link to={`/roles/edit/${row.id}`} className="btn btn-info btn-sm">
+                <Link to={`/roles/edit/${row.id}`} className="btn btn-primary btn-sm">
                     <i className="right fas fa-edit"></i> Edit
                 </Link>
             )

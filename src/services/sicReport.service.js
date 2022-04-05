@@ -40,9 +40,19 @@ const generateSicReports = () => {
 };
 //Generate sic report API code end
 
+//Generate sic report API code start
+const sicGraphCharts = () => {
+  return axios.get(API_URL + "sicsubsection1/report",
+    {
+      headers: authHeader(),
+    })
+};
+//Generate sic report API code end
+
 export default {
   getAllSics,
   importSicReports,
   sicReportsData,
-  generateSicReports
+  generateSicReports,
+  sicGraphCharts
 };

@@ -4,7 +4,9 @@ import {
     SET_SIC_REPORTS_DATA,
     FETCHING_SIC_REPORTS_DATA,
     SET_SIC_REPORTS,
-    FETCHING_SIC_REPORTS
+    FETCHING_SIC_REPORTS,
+    FETCHING_SIC_GRAPH_CHARTS,
+    SET_SIC_GRAPH_CHARTS
 } from "../types";
 import SicReportService from "../../services/sicReport.service";
 import { toast } from 'react-toastify';
@@ -147,4 +149,44 @@ export const generateSicReports = () => (dispatch) => {
     );
 };
 //Generate sic report code end
+
+//Sic graph charts code start
+export const sicGraphCharts = () => (dispatch) => {
+    dispatch({
+        type: FETCHING_SIC_GRAPH_CHARTS,
+        payload: true,
+    });
+    return SicReportService.sicGraphCharts().then(
+        (response) => {
+            if (response.data.data) {
+                dispatch({
+                    type: SET_SIC_GRAPH_CHARTS,
+                    payload: response.data.data,
+                });
+
+                dispatch({
+                    type: FETCHING_SIC_GRAPH_CHARTS,
+                    payload: false,
+                });
+            }
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: FETCHING_SIC_GRAPH_CHARTS,
+                payload: false,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+//Sic graph charts code end
 
