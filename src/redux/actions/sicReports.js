@@ -5,8 +5,15 @@ import {
     FETCHING_SIC_REPORTS_DATA,
     SET_SIC_REPORTS,
     FETCHING_SIC_REPORTS,
-    FETCHING_SIC_GRAPH_CHARTS,
-    SET_SIC_GRAPH_CHARTS
+    FETCHING_SIC30_GRAPH_CHARTS,
+    SET_SIC30_GRAPH_CHARTS,
+    FETCHING_SIC27_GRAPH_CHARTS,
+    SET_SIC27_GRAPH_CHARTS,
+    FETCHING_SIC14_GRAPH_CHARTS,
+    SET_SIC14_GRAPH_CHARTS,
+    SET_SIC_GRAPH_TYPE,
+    FETCHING_SIC_GRAPH,
+    SET_SIC_GRAPH_CHART
 } from "../types";
 import SicReportService from "../../services/sicReport.service";
 import { toast } from 'react-toastify';
@@ -150,22 +157,22 @@ export const generateSicReports = () => (dispatch) => {
 };
 //Generate sic report code end
 
-//Sic graph charts code start
-export const sicGraphCharts = () => (dispatch) => {
+//Sic30 graph charts code start
+export const sic30GraphCharts = () => (dispatch) => {
     dispatch({
-        type: FETCHING_SIC_GRAPH_CHARTS,
+        type: FETCHING_SIC30_GRAPH_CHARTS,
         payload: true,
     });
-    return SicReportService.sicGraphCharts().then(
+    return SicReportService.sic30GraphCharts().then(
         (response) => {
             if (response.data.data) {
                 dispatch({
-                    type: SET_SIC_GRAPH_CHARTS,
+                    type: SET_SIC30_GRAPH_CHARTS,
                     payload: response.data.data,
                 });
 
                 dispatch({
-                    type: FETCHING_SIC_GRAPH_CHARTS,
+                    type: FETCHING_SIC30_GRAPH_CHARTS,
                     payload: false,
                 });
             }
@@ -180,7 +187,7 @@ export const sicGraphCharts = () => (dispatch) => {
                 error.toString();
 
             dispatch({
-                type: FETCHING_SIC_GRAPH_CHARTS,
+                type: FETCHING_SIC30_GRAPH_CHARTS,
                 payload: false,
             });
 
@@ -188,5 +195,132 @@ export const sicGraphCharts = () => (dispatch) => {
         }
     );
 };
-//Sic graph charts code end
+//Sic30 graph charts code end
+
+//Sic27 graph charts code start
+export const sic27GraphCharts = () => (dispatch) => {
+    dispatch({
+        type: FETCHING_SIC30_GRAPH_CHARTS,
+        payload: true,
+    });
+    return SicReportService.sic27GraphCharts().then(
+        (response) => {
+            if (response.data.data) {
+                dispatch({
+                    type: SET_SIC27_GRAPH_CHARTS,
+                    payload: response.data.data,
+                });
+
+                dispatch({
+                    type: FETCHING_SIC27_GRAPH_CHARTS,
+                    payload: false,
+                });
+            }
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: FETCHING_SIC27_GRAPH_CHARTS,
+                payload: false,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+//Sic27 graph charts code end
+
+//Sic14 graph charts code start
+export const sic14GraphCharts = () => (dispatch) => {
+    dispatch({
+        type: FETCHING_SIC14_GRAPH_CHARTS,
+        payload: true,
+    });
+    return SicReportService.sic14GraphCharts().then(
+        (response) => {
+            if (response.data.data) {
+                dispatch({
+                    type: SET_SIC14_GRAPH_CHARTS,
+                    payload: response.data.data,
+                });
+
+                dispatch({
+                    type: FETCHING_SIC14_GRAPH_CHARTS,
+                    payload: false,
+                });
+            }
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: FETCHING_SIC14_GRAPH_CHARTS,
+                payload: false,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+//Sic27 graph charts code end
+
+//Dynamic Sic graph charts code start
+export const getSicGraphChart = (type) => (dispatch) => {
+    console.log(type)
+    dispatch({
+        type: FETCHING_SIC_GRAPH,
+        payload: true,
+    });
+
+    return SicReportService.sicGraphCharts(type).then(
+        (response) => {
+            if (response.data.data) {
+                dispatch({
+                    type: SET_SIC_GRAPH_CHART,
+                    payload: response.data.data,
+                });
+
+                dispatch({
+                    type: FETCHING_SIC_GRAPH,
+                    payload: false,
+                });
+
+                dispatch({
+                    type: SET_SIC_GRAPH_TYPE,
+                    payload: type,
+                });
+            }
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: FETCHING_SIC_GRAPH,
+                payload: false,
+            });
+
+            return Promise.reject();
+        }
+    );
+}
+//Dynamic Sic graph charts code end
 

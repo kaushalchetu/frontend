@@ -40,19 +40,49 @@ const generateSicReports = () => {
 };
 //Generate sic report API code end
 
-//Generate sic report API code start
-const sicGraphCharts = () => {
-  return axios.get(API_URL + "sicsubsection1/report",
+//Sic30 graph chart API code start
+const sic30GraphCharts = () => {
+  return axios.get(API_URL + "sic30/report",
     {
       headers: authHeader(),
     })
 };
-//Generate sic report API code end
+//Sic30 graph chart API code end
+
+//Sic27 graph chart API code start
+const sic27GraphCharts = () => {
+  return axios.get(API_URL + "sic27/report",
+    {
+      headers: authHeader(),
+    })
+};
+//Sic27 graph chart API code end
+
+//Sic14 graph chart API code start
+const sic14GraphCharts = () => {
+  return axios.get(API_URL + "sic14/report",
+    {
+      headers: authHeader(),
+    })
+};
+//Sic14 graph chart API code end
+
+//Dynamic Sic graph charts API code start
+const sicGraphCharts = (type) => {
+  return axios.get(API_URL + "sic/report/" + type,
+    {
+      headers: authHeader(),
+    })
+};
+//Dynamic Sic graph charts API code end
 
 export default {
   getAllSics,
   importSicReports,
   sicReportsData,
   generateSicReports,
+  sic30GraphCharts,
+  sic27GraphCharts,
+  sic14GraphCharts,
   sicGraphCharts
 };

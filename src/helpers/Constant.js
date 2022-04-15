@@ -10,6 +10,11 @@ const API_URL = "http://127.0.0.1:8000/api/";
 // const API_URL = "https://GeoDataEngineering-Api-QA.chetu.com/api/";     
 //QA-server URL code end
 
+//VM-server URL code start
+//const BASE_URL = "https://geodataengineeringsa-trpt.chetu.com/";
+//const API_URL = "https://geodataengineeringsa-backend.chetu.com/api/";
+//VM-server URL code end
+
 export {
     BASE_URL,
     API_URL
