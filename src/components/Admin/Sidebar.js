@@ -127,12 +127,12 @@ const Sidebar = () => {
                                         <p>SIC27 Graph Charts</p>
                                     </Link>
                                 </li>
-                                {/* <li className="nav-item">
+                                <li className="nav-item">
                                     <Link to="/sic14/graph/charts" className="nav-link">
                                         <i className="far fa-circle nav-icon"></i>
                                         <p>SIC14 Graph Charts</p>
                                     </Link>
-                                </li> */}
+                                </li>
                             </ul>
                         </li>
                         {/* <li className="nav-item">

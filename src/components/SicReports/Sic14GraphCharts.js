@@ -100,26 +100,26 @@ const Sic14GraphCharts = () => {
                                                                             CI
                                                                         </div>
                                                                     </td>
-                                                                    {index === 0 && (
+                                                                    {/* {index === 0 && (
                                                                         <td colSpan="14" rowSpan="2" >
                                                                             <div className="flex-first">
                                                                                 <span>
-                                                                                    <div>DEFLEXIONES</div>
-                                                                                    <div>DETALLADAS</div>
+                                                                                    <div>DAÑOS PAVIMENTO</div>
+                                                                                    <div>FLEXIBLE</div>
                                                                                 </span>
                                                                                 <span>
                                                                                     <div>N - S </div>
                                                                                 </span>
                                                                             </div>
                                                                         </td>
-                                                                    )}                                                                   
+                                                                    )}                                                                    */}
                                                                     {chunk.map((value, i) => (
                                                                         <React.Fragment key={i}>
-                                                                            {!data?.ci[value].spanCell ? (
+                                                                            {/* {!data?.ci[value].spanCell ? ( */}
                                                                                 <td style={{ backgroundColor: data?.ci[value].color }}>
                                                                                     <div className="color-bg" ></div>
                                                                                 </td>
-                                                                            ) : null}
+                                                                            {/* ) : null} */}
                                                                         </React.Fragment>
                                                                     ))}
                                                                 </tr>
@@ -131,11 +131,11 @@ const Sic14GraphCharts = () => {
                                                                     </td>
                                                                     {chunk.map((value, i) => (
                                                                         <React.Fragment key={i}>
-                                                                            {!data?.ci[value].spanCell ? (
-                                                                                <td style={{ backgroundColor: data?.cd[value].color }}>
+                                                                            {/* {!data?.ci[value].spanCell ? ( */}
+                                                                                <td style={{ backgroundColor: data?.cd[value]?data?.cd[value].color:null }}>
                                                                                     <div className="color-bg" ></div>
                                                                                 </td>
-                                                                            ) : null}
+                                                                            {/* ) : null} */}
                                                                         </React.Fragment>
                                                                     ))}
                                                                 </tr>

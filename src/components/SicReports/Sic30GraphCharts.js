@@ -67,31 +67,6 @@ const Sic30GraphCharts = () => {
                                                 </table>
                                             </td>
                                         </tr>
-                                        
-                                        <tr>
-                                            <td>
-                                                <table className="w-100">
-                                                    <tr>
-                                                        <td className="pt-1"></td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-
-                                        <div className="heading-table">
-                                            <table className="w-100 table-subtramo">
-                                                <tbody>
-                                                    <tr className="first-heading">
-                                                        <td style={{ backgroundColor: "#757575" }}>
-                                                            <div className="main-heading">
-                                                                <h4>SUBTRAMO 1: PATIVILCA - HUARME</h4>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
                                         <tr>
                                             <td className="p-0">
                                                 <table className="w-100 table-subtramo">
@@ -117,33 +92,33 @@ const Sic30GraphCharts = () => {
                                                                                 {data?.ciEven[value].name}
                                                                             </div>
                                                                         </td>
-                                                                        
+
                                                                     ))}
                                                                 </tr>
                                                                 <tr className="border-td">
                                                                     <td>
-                                                                        <div>
+                                                                        <div style={{ visibility: "hidden" }}>
                                                                             CI
                                                                         </div>
                                                                     </td>
                                                                     {index === 0 ?
-                                                                    <td colSpan="7" rowSpan="4" >
-                                                                        <div className="flex-first">
-                                                                            <span>
-                                                                                <div>INICIO DE LA</div>
-                                                                                <div>CONCESIÓN</div>
-                                                                            </span>
-                                                                            <span>
-                                                                                <div>N - S </div>
-                                                                            </span>
-                                                                        </div>
-                                                                    </td> : null
+                                                                        <td colSpan="7" rowSpan="7">
+                                                                            <div className="flex-first">
+                                                                                <span>
+                                                                                    <div>INICIO DE LA</div>
+                                                                                    <div>CONCESIÓN</div>
+                                                                                </span>
+                                                                                <span>
+                                                                                    <div>N - S </div>
+                                                                                </span>
+                                                                            </div>
+                                                                        </td> : null
                                                                     }
                                                                     {chunk.map((value, i) => (
                                                                         <React.Fragment key={i}>
                                                                             {!data?.ciEven[value].spanCell ? (
-                                                                                <td style={{ backgroundColor: data?.ciEven[value].color }}>
-                                                                                    <div className="color-bg" ></div>
+                                                                                <td style={{ backgroundColor: 'grey', borderColor: 'black grey black black' }}>
+                                                                                    <div className="color-bg"></div>
                                                                                 </td>
                                                                             ) : null}
                                                                         </React.Fragment>
@@ -155,16 +130,38 @@ const Sic30GraphCharts = () => {
                                                                             CI
                                                                         </div>
                                                                     </td>
-
                                                                     {chunk.map((value, i) => (
                                                                         <React.Fragment key={i}>
                                                                             {!data?.ciEven[value].spanCell ? (
-                                                                                <td style={{ backgroundColor: data?.ciOdd[value].color }}>
-                                                                                    <div className="color-bg" ></div>
+                                                                                <td style={{ backgroundColor: data?.ciEven[value].color }}>
+                                                                                    <div className="color-bg"></div>
                                                                                 </td>
                                                                             ) : null}
                                                                         </React.Fragment>
                                                                     ))}
+                                                                </tr>
+                                                                <tr className="border-td">
+                                                                    <td>
+                                                                        <div>
+                                                                            CI
+                                                                        </div>
+                                                                    </td>
+                                                                    {chunk.map((value, i) => (
+                                                                        <React.Fragment key={i}>
+                                                                            {!data?.ciEven[value].spanCell ? (
+                                                                                <td style={{ backgroundColor: data?.ciOdd[value].color }}>
+                                                                                    <div className="color-bg"></div>
+                                                                                </td>
+                                                                            ) : null}
+                                                                        </React.Fragment>
+                                                                    ))}
+                                                                </tr>
+                                                                <tr className="border-td">
+                                                                    <td>
+                                                                        <div style={{ visibility: "hidden" }}>
+                                                                            CI
+                                                                        </div>
+                                                                    </td>
                                                                 </tr>
                                                                 <tr className="border-td">
                                                                     <td>
@@ -192,7 +189,23 @@ const Sic30GraphCharts = () => {
                                                                         <React.Fragment key={i}>
                                                                             {!data?.ciEven[value].spanCell ? (
                                                                                 <td style={{ backgroundColor: data?.cdOdd[value].color }}>
-                                                                                    <div className="color-bg" ></div>
+                                                                                    <div className="color-bg"></div>
+                                                                                </td>
+                                                                            ) : null}
+                                                                        </React.Fragment>
+                                                                    ))}
+                                                                </tr>
+                                                                <tr className="border-td">
+                                                                    <td>
+                                                                        <div style={{ visibility: "hidden" }}>
+                                                                            CI
+                                                                        </div>
+                                                                    </td>
+                                                                    {chunk.map((value, i) => (
+                                                                        <React.Fragment key={i}>
+                                                                            {!data?.ciEven[value].spanCell ? (
+                                                                                <td style={{ backgroundColor: '#dbd2d2', borderColor: 'black #dbd2d2 black black' }}>
+                                                                                    <div className="color-bg"></div>
                                                                                 </td>
                                                                             ) : null}
                                                                         </React.Fragment>
@@ -213,30 +226,6 @@ const Sic30GraphCharts = () => {
                                                 </table>
                                             </td>
                                         </tr>
-                                        <div className="heading-table">
-                                            <table className="w-100 table-subtramo">
-                                                <tbody>
-                                                    <tr className="first-heading">
-                                                        <td style={{ backgroundColor: "#757575" }}>
-                                                            <div className="main-heading">
-                                                                <h4>SUBTRAMO 1: PATIVILCA - HUARME</h4>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        
-                                        <tr>
-                                            <td>
-                                                <table className="w-100">
-                                                    <tr>
-                                                        <td className="pt-2"></td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-
                                     </tbody>
                                 </table>
                             </div>
